@@ -1,0 +1,11 @@
+---
+---
+<script>
+    import { scroll, animate } from "framer-motion";
+    const animation = animate(
+        ".progress",
+        { width: ['0', '100%']},
+        { ease: "easeOut", duration: 200 }
+    )
+    scroll(animation)
+</script>

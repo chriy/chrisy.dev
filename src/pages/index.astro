@@ -1,0 +1,23 @@
+---
+import HeroSection from "@/components/Hero.astro";
+import Layout from "@/layouts/Layout.astro";
+import { Site } from "@/site.config";
+import Hero from "@/components/Hero.astro";
+import Intro from "@/components/Intro.astro";
+import Links from "@/components/Links.astro";
+import Animations from "@/components/Animations.astro";
+// 从 URL 中获取当前路径
+const currentPath = Astro.url.pathname;
+console.log("currentPath", currentPath);
+---
+
+<Layout>
+    <Animations/>
+    <Hero/>
+    <Links/>
+    <!--<Intro/>-->
+    <!--<section class="mx-auto" style="height:1800px">-->
+
+
+    <!--</section>-->
+</Layout>
