@@ -7,7 +7,7 @@
 @tailwind utilities;
 
 @layer utilities {
-    --expo-out: 100;
+
 }
 
 html {
@@ -19,7 +19,7 @@ html {
 body {
     margin: 0;
     padding: 0;
-    font-family: "Nunito",  sans-serif;
+    font-family: "Nunito", sans-serif;
     font-optical-sizing: auto;
     font-style: normal;
 }
@@ -35,7 +35,7 @@ body {
     --color-primary-text-light: #212121;
     --color-primary-text-dark: #E0E0E0;
 
-    --color-accent-light:#4285F4;
+    --color-accent-light: #4285F4;
     --color-accent-dark: #8AB4F8;
 
     --color-dark-900: #0a0a0a;
@@ -59,6 +59,6 @@ body {
 }
 
 .no-scrollbar {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;     /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
 }
