@@ -13,20 +13,12 @@ const { title = Site.meta.title } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="generator" content={Astro.generator}>
     <meta name="description" content={Site.meta.description}/>
-    <title>{title}</title>
+    <title>{`Chrisy - ${title}`}</title>
     <link rel="icon" href="/favicon.ico" type="image/icon">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Azeret+Mono:ital,wght@0,100..900;1,100..900&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
-          rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&family=Noto+Serif+SC:wght@400;700&family=Noto+Serif+TC:wght@400;700&display=swap"
-          rel="stylesheet">
-    <!-- 等宽代码字体 -->
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body class="bg-primary-light dark:bg-primary-dark">
 <Header/>
-<main class="w-11/12 mx-auto">
+<main>
     <slot/>
 </main>
 <Footer/>
