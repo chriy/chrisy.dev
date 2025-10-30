@@ -4,10 +4,6 @@ import react from "@astrojs/react";
 // https://astro.build/config
 export default defineConfig({
     site: 'https://chrisy.dev',
-    base: '/',
-    output: 'static',
-    srcDir: "./src",
-    publicDir: "./public",
     server: {
         port: 3000
     },
