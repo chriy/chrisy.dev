@@ -15,7 +15,7 @@ const menu = [
 export default function Navigation() {
     const pathname = usePathname();
     return (
-        <nav className="h-fit items-center justify-end px-2 pb-2 md:pb-0 flex-1 text-primary-text-light dark:text-primary-text-dark">
+        <nav className="h-fit items-center px-2 pb-2 md:pb-0 flex-1 text-primary-text-light dark:text-primary-text-dark">
             <div className="flex flex-col md:flex-row justify-end md:items-center">
                 {menu.map(({ label, path }, index) => {
                     const active = path === pathname;

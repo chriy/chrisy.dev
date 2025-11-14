@@ -6,6 +6,7 @@ import Theme from "./Theme";
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import Navigation from "@/components/Navigation";
+import { nunito } from "@/styles/font";
 
 export default function Header() {
     const [visible, setVisible] = useState(true);
@@ -65,7 +66,7 @@ export default function Header() {
                         pointerEvents: visible ? 'auto' : 'none'
                     }}
                     transition={{ ease: "easeOut" }}
-                    className={`flex items-center flex-col justify-between  mx-auto overflow-hidden w-full md:w-9/12 ring-[#e5e7eb] dark:ring-[#3f3f46] max-h-fit duration-200 transition-all backdrop-blur-sm ring-1 ${colspan ? 'rounded-2xl h-80 bg-white/80 dark:bg-transparent' : 'rounded-4xl h-16'}`}
+                    className={`flex items-center flex-col justify-between mx-auto overflow-hidden w-full md:w-9/12 ring-[#e5e7eb] dark:ring-[#3f3f46] max-h-fit duration-200 transition-all backdrop-blur-sm ring-1 ${colspan ? 'rounded-2xl h-80 bg-white/80 dark:bg-transparent' : 'rounded-4xl h-16'} ${nunito.className}`}
                 >
                     <div className={`flex items-center justify-between min-h-16 w-full pr-2`}>
                         <div className="flex items-center justify-center w-12 h-12 md:w-14 md:h-14 mx-2 cursor-pointer relative">
