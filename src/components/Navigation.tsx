@@ -1,37 +1,68 @@
-"use client"
+'use client'
+
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 
 const menu = [
     { path: '/', label: 'Home' },
     { path: '/posts', label: 'Posts' },
     { path: '/archive', label: 'Archive' },
-    { path: '/gallery', label: 'Gallery' },
+    { path: '/moment', label: 'Moment' },
     { path: '/about', label: 'About' }
 ]
 
-
 export default function Navigation() {
     const pathname = usePathname();
+    // 用于追踪鼠标当前悬停在哪个 Item 上，实现 Desktop 端的跟随效果
+    const [hoveredPath, setHoveredPath] = useState<string|null>(pathname);
+
     return (
-        <nav className="h-fit items-center px-2 pb-2 md:pb-0 flex-1 text-primary-text-light dark:text-primary-text-dark">
-            <div className="flex flex-col md:flex-row justify-end md:items-center">
+        <nav className="w-full md:w-auto">
+            <div className="flex flex-col md:flex-row items-start md:items-center gap-1 md:gap-2 w-full">
                 {menu.map(({ label, path }, index) => {
-                    const active = path === pathname;
-                    return <motion.div
-                        key={index}
-                        initial={{ opacity: 0, x: -40 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: -40 }}
-                        transition={{ duration: 0.2, delay: index * 0.1 }}
-                        className="relative"
-                    >
-                        <Link href={path} className={`inline-block py-2 px-4 hover:text-accent-light font-bold w-full h-full ${active && 'text-accent-light dark:text-accent-dark'} `}>
-                            {label}
-                        </Link>
-                        <span className={`absolute md:hidden left-0 top-0 -z-10 w-full h-10 rounded-md bg-[#f4f6f8] dark:bg-[#2c3e50] transition-all duration-200 ${active ? "opacity-100" : "opacity-0"}`}></span>
-                    </motion.div>
+                    const isActive = path === pathname;
+
+                    return (
+                        <motion.div
+                            key={path}
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.2, delay: index * 0.1 }}
+                            className="relative w-full md:w-auto"
+                            onMouseEnter={() => setHoveredPath(path)}
+                            onMouseLeave={() => setHoveredPath(pathname)}
+                        >
+                            <Link
+                                href={path}
+                                className={`
+                                    relative block w-full px-4 py-2 rounded-full text-sm font-bold transition-colors duration-200
+                                    ${isActive ? "text-blue-600 dark:text-blue-400" : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100"}
+                                `}
+                            >
+                                {/* 只有当 hover 到当前 item 时才渲染这个背景 */}
+                                {path === hoveredPath && (
+                                    <motion.span
+                                        layoutId="nav-item-pill"
+                                        className="absolute inset-0 bg-gray-100 dark:bg-white/10 rounded-full -z-10 hidden md:block"
+                                        transition={{
+                                            type: "spring",
+                                            stiffness: 300,
+                                            damping: 30
+                                        }}
+                                    />
+                                )}
+
+                                {/* --- Mobile 端的静态高亮背景 (不需要滑动) --- */}
+                                {isActive && (
+                                    <span className="absolute inset-0 bg-gray-100 dark:bg-white/10 rounded-lg -z-10 md:hidden"></span>
+                                )}
+
+                                <span className="relative z-10">{label}</span>
+                            </Link>
+                        </motion.div>
+                    )
                 })}
             </div>
         </nav>

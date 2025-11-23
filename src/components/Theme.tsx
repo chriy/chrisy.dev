@@ -1,53 +1,101 @@
-"use client"
+'use client'
 
 import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 
 export default function Theme() {
-
     const [theme, setTheme] = useState<"dark"|"light">("light");
+    const [mounted, setMounted] = useState(false);
 
-    // init
+    // 初始化逻辑
     useEffect(() => {
-        const theme = localStorage.getItem('theme');
-        setTheme(theme === "dark" ? "dark" : "light");
-        document.documentElement.classList.toggle("dark", theme === "dark");
-        // listening system
-        const media = window.matchMedia("(prefers-color-scheme: dark)");
-        const handler = (e: MediaQueryListEvent) => {
-            document.documentElement.classList.toggle("dark", e.matches);
-        };
-        return () => media.removeEventListener("change", handler);
-    }, [])
+        setMounted(true);
 
-    // switch theme
+        const localTheme = localStorage.getItem('theme') as "dark"|"light"|null;
+        const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+        const initialTheme = localTheme || (systemPrefersDark ? "dark" : "light");
+        setTheme(initialTheme);
+        document.documentElement.classList.toggle("dark", initialTheme === "dark");
+
+        const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+        const handler = (e: MediaQueryListEvent) => {
+            if (!localStorage.getItem('theme')) {
+                const newTheme = e.matches ? "dark" : "light";
+                setTheme(newTheme);
+                document.documentElement.classList.toggle("dark", e.matches);
+            }
+        };
+
+        mediaQuery.addEventListener("change", handler);
+        return () => mediaQuery.removeEventListener("change", handler);
+    }, []);
+
     const toggle = () => {
-        const invoke = () => {
-            const isDark = document?.documentElement.classList.toggle('dark')
-            setTheme(isDark ? "dark" : "light");
-            localStorage.setItem('theme', isDark ? 'dark' : 'light')
+        const nextTheme = theme === "dark" ? "light" : "dark";
+
+        const updateDOM = () => {
+            document.documentElement.classList.toggle('dark', nextTheme === 'dark');
+            localStorage.setItem('theme', nextTheme);
+            setTheme(nextTheme);
+        };
+
+        if (document.startViewTransition) {
+            document.startViewTransition(updateDOM);
+        } else {
+            updateDOM();
         }
-        return document?.startViewTransition ? document?.startViewTransition(invoke) : invoke()
+    };
+
+    // 防止 SSR 水合不匹配：未挂载前渲染一个空的占位符
+    if (!mounted) {
+        return <div className="w-9 h-9"/>;
     }
 
     return (
-        <button type="button" onClick={toggle} className="rounded-full size-7 inline-flex cursor-pointer justify-center items-center text-primary-text-light focus:outline-hidden text-xs md:text-sm dark:border-neutral-700 dark:text-white">
-            {theme === 'dark' ?
-                <svg className="hover:rotate-360 rotate-0 transition-all duration-500 shrink-0 size-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round">
-                    <circle cx="12" cy="12" r="4"></circle>
-                    <path d="M12 2v2"></path>
-                    <path d="M12 20v2"></path>
-                    <path d="m4.93 4.93 1.41 1.41"></path>
-                    <path d="m17.66 17.66 1.41 1.41"></path>
-                    <path d="M2 12h2"></path>
-                    <path d="M20 12h2"></path>
-                    <path d="m6.34 17.66-1.41 1.41"></path>
-                    <path d="m19.07 4.93-1.41 1.41"></path>
-                </svg> :
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
-                    <path d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8V16Z" fill="#121212"/>
-                    <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2ZM12 4V8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16V20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4Z" fill="#121212"/>
-                </svg>
-            }
+        <button
+            type="button"
+            onClick={toggle}
+            aria-label="Toggle Theme"
+            className="relative flex items-center justify-center w-9 h-9 rounded-full transition-colors hover:bg-gray-100 dark:hover:bg-neutral-800 focus:outline-none ring-1 ring-transparent focus-visible:ring-gray-300 cursor-pointer"
+        >
+            <AnimatePresence mode="wait" initial={false}>
+                {theme === 'dark' ? (
+                    <motion.div
+                        key="sun"
+                        initial={{ scale: 0.5, rotate: -90, opacity: 0 }}
+                        animate={{ scale: 1, rotate: 0, opacity: 1 }}
+                        exit={{ scale: 0.5, rotate: 90, opacity: 0 }}
+                        transition={{ duration: 0.2 }}
+                    >
+                        {/* Sun Icon - 显示黄色 */}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-amber-500">
+                            <circle cx="12" cy="12" r="4"></circle>
+                            <path d="M12 2v2"></path>
+                            <path d="M12 20v2"></path>
+                            <path d="m4.93 4.93 1.41 1.41"></path>
+                            <path d="m17.66 17.66 1.41 1.41"></path>
+                            <path d="M2 12h2"></path>
+                            <path d="M20 12h2"></path>
+                            <path d="m6.34 17.66-1.41 1.41"></path>
+                            <path d="m19.07 4.93-1.41 1.41"></path>
+                        </svg>
+                    </motion.div>
+                ) : (
+                    <motion.div
+                        key="moon"
+                        initial={{ scale: 0.5, rotate: 90, opacity: 0 }}
+                        animate={{ scale: 1, rotate: 0, opacity: 1 }}
+                        exit={{ scale: 0.5, rotate: -90, opacity: 0 }}
+                        transition={{ duration: 0.2 }}
+                    >
+                        {/* Moon Icon - 显示深灰色或蓝色 */}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-600 dark:text-blue-400">
+                            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+                        </svg>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </button>
     )
 }
