@@ -4,6 +4,8 @@ import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import { AnimatePresence } from "framer-motion";
 import { Metadata } from "next";
+import { NotoSansSC, Nunito } from "@/lib/font";
+import { ThemeProvider } from "next-themes";
 
 export const metadata: Metadata = {
     icons: '/favicon.ico',
@@ -13,15 +15,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: {children: React.ReactNode}) {
     return (
-        <html lang="en" className='no-scrollbar'>
-        <body className='bg-primary-light dark:bg-primary-dark'>
-        <Header/>
-        <AnimatePresence>
-            <main className='all-wrapper'>
-                {children}
-            </main>
-        </AnimatePresence>
-        <Footer/>
+        <html lang="en" className='no-scrollbar' suppressHydrationWarning>
+        <body className={`bg-theme-light dark:bg-theme-dark ${[NotoSansSC, Nunito].map(f => f.className)}`}>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem={true}>
+            <Header/>
+            <AnimatePresence>
+                <main className='all-wrapper'>{children}</main>
+            </AnimatePresence>
+            <Footer/>
+        </ThemeProvider>
         </body>
         </html>
     )

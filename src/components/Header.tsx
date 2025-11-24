@@ -7,7 +7,6 @@ import Theme from "@/components/Theme";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import Navigation from "@/components/Navigation";
-import { nunito } from "@/styles/font";
 
 export default function Header() {
     const [visible, setVisible] = useState(true);
@@ -73,13 +72,7 @@ export default function Header() {
                         closed: { borderRadius: "50px" }
                     }}
                     transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                    className={`
-                        relative flex flex-col items-center w-full lg:w-9/12
-                        bg-white/90 dark:bg-neutral-900/80 backdrop-blur-sm
-                        border border-gray-200/50 dark:border-white/10
-                        shadow-lg shadow-gray-200/10 dark:shadow-none
-                        ${nunito.className}
-                    `}
+                    className="relative flex flex-col items-center w-full lg:w-9/12 bg-white/70 dark:bg-neutral-900/80 backdrop-blur-md border border-gray-200/50 dark:border-white/10 shadow-md shadow-gray-200/20 dark:shadow-neutral-950/10"
                 >
                     {/* Top Row: Logo, Nav, Actions */}
                     <div className="flex items-center justify-between w-full h-14 pl-2 pr-4">

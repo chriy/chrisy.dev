@@ -1,56 +1,48 @@
+@import "./theme.css";
 @import "tailwindcss";
 
-
-@variant dark (&:where(.dark, .dark *));
-@variant open (&:where(.open, .open *, &[open]));
-
-@tailwind utilities;
-
-@layer utilities {
-
-}
-
-html {
-    font-size: 16px;
-    line-height: 1.5;
-    -webkit-text-size-adjust: 100%;
-}
-
-body {
-    margin: 0;
-    padding: 0;
-    font-family: "Nunito", sans-serif;
-    font-optical-sizing: auto;
-    font-style: normal;
-}
-
-.wrapper {
-    @apply w-full sm:w-10/12 md:w-9/12 2xl:w-9/12 max-w-screen-2xl mx-auto
-}
+@custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-    --color-primary-light: #fff;
-    --color-primary-dark: #121212;
+    --color-theme-light: #ffffff; /*f8f8ff faf9f6*/
+    --color-theme-dark: #121212; /*121212*/
 
     --color-primary-text-light: #212121;
     --color-primary-text-dark: #E0E0E0;
-
     --color-accent-light: #4285F4;
     --color-accent-dark: #8AB4F8;
-
     --color-dark-900: #0a0a0a;
     --color-dark-pupple: #5f11a6;
-
     --color-header-black: #1F1F1F;
     --color-primary-blue: #3B82F6;
-
-    --radius-5xl: 2.5rem;
 }
 
 *,
 ::before,
 ::after {
     box-sizing: border-box;
+}
+
+
+html {
+    font-size: 16px;
+}
+
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Nunito", "Noto Sans SC", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 1rem;
+    line-height: 1.5;
+    font-weight: 400;
+    font-style: normal;
+    font-optical-sizing: auto;
+    -webkit-text-size-adjust: 100%;
+}
+
+.all-wrapper {
+    @apply w-11/12 sm:w-10/12 md:w-9/12 2xl:w-9/12 max-w-screen-2xl mx-auto md:px-15
 }
 
 /* 全局隐藏滚动条 */

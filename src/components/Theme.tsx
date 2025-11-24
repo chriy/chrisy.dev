@@ -2,55 +2,33 @@
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { useTheme } from "next-themes";
 
 export default function Theme() {
-    const [theme, setTheme] = useState<"dark"|"light">("light");
     const [mounted, setMounted] = useState(false);
+    const { setTheme, resolvedTheme } = useTheme();
 
-    // 初始化逻辑
     useEffect(() => {
         setMounted(true);
-
-        const localTheme = localStorage.getItem('theme') as "dark"|"light"|null;
-        const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-
-        const initialTheme = localTheme || (systemPrefersDark ? "dark" : "light");
-        setTheme(initialTheme);
-        document.documentElement.classList.toggle("dark", initialTheme === "dark");
-
-        const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-        const handler = (e: MediaQueryListEvent) => {
-            if (!localStorage.getItem('theme')) {
-                const newTheme = e.matches ? "dark" : "light";
-                setTheme(newTheme);
-                document.documentElement.classList.toggle("dark", e.matches);
-            }
-        };
-
-        mediaQuery.addEventListener("change", handler);
-        return () => mediaQuery.removeEventListener("change", handler);
     }, []);
 
     const toggle = () => {
-        const nextTheme = theme === "dark" ? "light" : "dark";
-
-        const updateDOM = () => {
-            document.documentElement.classList.toggle('dark', nextTheme === 'dark');
-            localStorage.setItem('theme', nextTheme);
-            setTheme(nextTheme);
-        };
+        const nextTheme = resolvedTheme === "dark" ? "light" : "dark";
+        const updateTheme = () => setTheme(nextTheme);
 
         if (document.startViewTransition) {
-            document.startViewTransition(updateDOM);
+            document.startViewTransition(updateTheme);
         } else {
-            updateDOM();
+            updateTheme();
         }
     };
 
-    // 防止 SSR 水合不匹配：未挂载前渲染一个空的占位符
     if (!mounted) {
-        return <div className="w-9 h-9"/>;
+        return <div className="w-9 h-9"/>; // 占位防止布局跳动
     }
+
+    // 判断当前是否是深色 (resolvedTheme 会处理 system 设置)
+    const isDark = resolvedTheme === 'dark';
 
     return (
         <button
@@ -60,7 +38,7 @@ export default function Theme() {
             className="relative flex items-center justify-center w-9 h-9 rounded-full transition-colors hover:bg-gray-100 dark:hover:bg-neutral-800 focus:outline-none ring-1 ring-transparent focus-visible:ring-gray-300 cursor-pointer"
         >
             <AnimatePresence mode="wait" initial={false}>
-                {theme === 'dark' ? (
+                {isDark ? (
                     <motion.div
                         key="sun"
                         initial={{ scale: 0.5, rotate: -90, opacity: 0 }}
