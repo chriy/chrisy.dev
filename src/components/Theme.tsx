@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useTheme } from "next-themes";
+import { MoonStar, Sun } from "lucide-react";
 
 export default function Theme() {
     const [mounted, setMounted] = useState(false);
@@ -46,18 +47,7 @@ export default function Theme() {
                         exit={{ scale: 0.5, rotate: 90, opacity: 0 }}
                         transition={{ duration: 0.2 }}
                     >
-                        {/* Sun Icon - 显示黄色 */}
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-amber-500">
-                            <circle cx="12" cy="12" r="4"></circle>
-                            <path d="M12 2v2"></path>
-                            <path d="M12 20v2"></path>
-                            <path d="m4.93 4.93 1.41 1.41"></path>
-                            <path d="m17.66 17.66 1.41 1.41"></path>
-                            <path d="M2 12h2"></path>
-                            <path d="M20 12h2"></path>
-                            <path d="m6.34 17.66-1.41 1.41"></path>
-                            <path d="m19.07 4.93-1.41 1.41"></path>
-                        </svg>
+                        <Sun className="text-amber-500" width={20} height={20}/>
                     </motion.div>
                 ) : (
                     <motion.div
@@ -67,10 +57,7 @@ export default function Theme() {
                         exit={{ scale: 0.5, rotate: -90, opacity: 0 }}
                         transition={{ duration: 0.2 }}
                     >
-                        {/* Moon Icon - 显示深灰色或蓝色 */}
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-600 dark:text-blue-400">
-                            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
-                        </svg>
+                        <MoonStar className="text-blue-600" width={20} height={20}/>
                     </motion.div>
                 )}
             </AnimatePresence>
