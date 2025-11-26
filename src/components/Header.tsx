@@ -72,7 +72,7 @@ export default function Header() {
                         closed: { borderRadius: "50px" }
                     }}
                     transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                    className="relative flex flex-col items-center w-full lg:w-9/12 bg-white/70 dark:bg-neutral-950/70 backdrop-blur-md border border-neutral-200/50 dark:border-white/10 shadow-md shadow-neutral-200/20 dark:shadow-neutral-950/10"
+                    className="relative flex flex-col items-center w-full lg:w-9/12 bg-white/70 rounded-4xl dark:bg-neutral-950/70 backdrop-blur-md border border-neutral-200/50 dark:border-white/10 shadow-md shadow-neutral-200/20 dark:shadow-neutral-950/10"
                 >
                     {/* Top Row: Logo, Nav, Actions */}
                     <div className="flex items-center justify-between w-full h-14 pl-2 pr-4">
@@ -80,7 +80,7 @@ export default function Header() {
                         {/* Left: Logo area */}
                         <div className="flex items-center gap-3">
                             <Link href="/" className="relative block shrink-0">
-                                <div className="relative w-10 h-10 overflow-hidden rounded-full border border-neutral-100 dark:border-neutral-700 shadow-sm">
+                                <div className="relative w-10 h-10 overflow-hidden rounded-full">
                                     <Image
                                         src={logo}
                                         alt="Avatar"

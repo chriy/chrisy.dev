@@ -2,7 +2,6 @@ import '@/styles/global.css';
 import React from "react";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-import { AnimatePresence } from "framer-motion";
 import { Metadata } from "next";
 import { NotoSansSC, Nunito } from "@/lib/font";
 import { ThemeProvider } from "next-themes";
@@ -16,12 +15,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: {children: React.ReactNode}) {
     return (
         <html lang="en" className='no-scrollbar' suppressHydrationWarning>
-        <body className={`bg-theme-light dark:bg-theme-dark ${[NotoSansSC, Nunito].map(f => f.className)}`}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem={true}>
+        <body className={`bg-theme-light dark:bg-theme-dark transition-colors duration-300 ${NotoSansSC.className} ${Nunito.className}`}>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <Header/>
-            <AnimatePresence>
-                <main className='all-wrapper'>{children}</main>
-            </AnimatePresence>
+            <main className='all-wrapper'>{children}</main>
             <Footer/>
         </ThemeProvider>
         </body>
