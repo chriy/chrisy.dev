@@ -1,3 +1,17 @@
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    --color-theme-light: #ffffff; /*f8f8ff faf9f6*/
+    --color-theme-dark: #0a0a0a; /*121212*/
+}
+
+/* switch dark mode animate */
+@keyframes scale {
+    to {
+        mask-size: 200vmax;
+    }
+}
+
 ::view-transition-new(root) {
     mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><circle cx="20" cy="20" r="20" fill="white"/></svg>') center / 0 no-repeat;
     animation: scale 1s;
@@ -14,10 +28,4 @@
 .dark::view-transition-new(root) {
     animation: scale 1s;
     animation-fill-mode: both;
-}
-
-@keyframes scale {
-    to {
-        mask-size: 200vmax;
-    }
 }

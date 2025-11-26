@@ -72,7 +72,7 @@ export default function Header() {
                         closed: { borderRadius: "50px" }
                     }}
                     transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                    className="relative flex flex-col items-center w-full lg:w-9/12 bg-white/70 dark:bg-neutral-900/80 backdrop-blur-md border border-gray-200/50 dark:border-white/10 shadow-md shadow-gray-200/20 dark:shadow-neutral-950/10"
+                    className="relative flex flex-col items-center w-full lg:w-9/12 bg-white/70 dark:bg-neutral-950/70 backdrop-blur-md border border-neutral-200/50 dark:border-white/10 shadow-md shadow-neutral-200/20 dark:shadow-neutral-950/10"
                 >
                     {/* Top Row: Logo, Nav, Actions */}
                     <div className="flex items-center justify-between w-full h-14 pl-2 pr-4">
@@ -80,7 +80,7 @@ export default function Header() {
                         {/* Left: Logo area */}
                         <div className="flex items-center gap-3">
                             <Link href="/" className="relative block shrink-0">
-                                <div className="relative w-10 h-10 overflow-hidden rounded-full border border-gray-100 dark:border-gray-700 shadow-sm">
+                                <div className="relative w-10 h-10 overflow-hidden rounded-full border border-neutral-100 dark:border-neutral-700 shadow-sm">
                                     <Image
                                         src={logo}
                                         alt="Avatar"
@@ -89,7 +89,7 @@ export default function Header() {
                                     />
                                 </div>
                             </Link>
-                            <Link href="/" className="hidden sm:block font-bold text-gray-700 dark:text-gray-200 tracking-tight hover:opacity-80 transition-opacity">
+                            <Link href="/" className="hidden sm:block font-bold text-neutral-700 dark:text-neutral-200 tracking-tight hover:opacity-80 transition-opacity">
                                 Chrisy<span className="text-blue-500">.dev</span>
                             </Link>
                         </div>
@@ -109,7 +109,7 @@ export default function Header() {
                             <button
                                 type="button"
                                 onClick={() => setColspan(!colspan)}
-                                className="md:hidden p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-white/5 transition-colors"
+                                className="md:hidden p-2 rounded-full text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-white/5 transition-colors"
                             >
                                 <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" viewBox="0 0 24 24" stroke="currentColor" fill="none">
                                     {colspan ? (
@@ -132,7 +132,7 @@ export default function Header() {
                                 transition={{ duration: 0.3, ease: "easeInOut" }}
                                 className="w-full overflow-hidden md:hidden"
                             >
-                                <div className="p-4 border-t border-gray-100 dark:border-white/5 flex flex-col items-center gap-4 pb-6">
+                                <div className="p-4 border-t border-neutral-100 dark:border-white/5 flex flex-col items-center gap-4 pb-6">
                                     <Navigation/>
                                 </div>
                             </motion.div>

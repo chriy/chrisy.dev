@@ -1,21 +1,6 @@
+@import "./animate.css";
 @import "./theme.css";
 @import "tailwindcss";
-
-@custom-variant dark (&:where(.dark, .dark *));
-
-@theme {
-    --color-theme-light: #ffffff; /*f8f8ff faf9f6*/
-    --color-theme-dark: #121212; /*121212*/
-
-    --color-primary-text-light: #212121;
-    --color-primary-text-dark: #E0E0E0;
-    --color-accent-light: #4285F4;
-    --color-accent-dark: #8AB4F8;
-    --color-dark-900: #0a0a0a;
-    --color-dark-pupple: #5f11a6;
-    --color-header-black: #1F1F1F;
-    --color-primary-blue: #3B82F6;
-}
 
 *,
 ::before,
