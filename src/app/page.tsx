@@ -1,7 +1,7 @@
 import Hero from "@/components/hero";
 import LatestPost from "@/components/latest-post";
-import Connect from "@/components/Connect";
-import CapturedMoments from "@/components/Moments";
+import Connect from "@/components/connect";
+import CapturedMoments from "@/components/moments";
 
 export default function Page() {
     return (

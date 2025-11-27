@@ -8,8 +8,8 @@ import { useState } from "react";
 const menu = [
     { path: '/', label: 'Home' },
     { path: '/posts', label: 'Posts' },
-    { path: '/archive', label: 'Archive' },
-    { path: '/moment', label: 'Moment' },
+    { path: '/moments', label: 'Moments' },
+    { path: '/repo', label: 'Repo' },
     { path: '/about', label: 'About' }
 ]
 

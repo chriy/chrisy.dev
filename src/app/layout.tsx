@@ -8,7 +8,7 @@ import { ThemeProvider } from "next-themes";
 
 export const metadata: Metadata = {
     icons: '/favicon.ico',
-    title: 'Chrisy - Software engineer, Photographer & Hiker',
+    title: 'Chrisy - Software engineer',
     description: ' Hi, I\'m Chrisy - a passionate software engineer who loves capturing moments through photography and exploring nature on foot.',
 }
 
