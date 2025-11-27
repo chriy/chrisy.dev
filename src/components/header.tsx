@@ -3,10 +3,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import logo from '@/images/logo.png';
-import Theme from "@/components/Theme";
+import Theme from "@/components/theme";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import Navigation from "@/components/Navigation";
+import Navigation from "@/components/navigation";
 
 export default function Header() {
     const [visible, setVisible] = useState(true);
@@ -72,7 +72,7 @@ export default function Header() {
                         closed: { borderRadius: "50px" }
                     }}
                     transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                    className="relative flex flex-col items-center w-full lg:w-9/12 bg-white/70 rounded-4xl dark:bg-neutral-950/70 backdrop-blur-md border border-neutral-200/50 dark:border-white/10 shadow-md shadow-neutral-200/20 dark:shadow-neutral-950/10"
+                    className="relative flex flex-col items-center w-full lg:w-9/12 bg-white/80 rounded-4xl dark:bg-neutral-950/70 backdrop-blur-md border border-neutral-200/50 dark:border-white/10 shadow-md shadow-neutral-200/20 dark:shadow-neutral-950/10"
                 >
                     {/* Top Row: Logo, Nav, Actions */}
                     <div className="flex items-center justify-between w-full h-14 pl-2 pr-4">

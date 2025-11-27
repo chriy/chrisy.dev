@@ -1,16 +1,15 @@
-import { Fragment } from "react";
-import Hero from "@/components/Hero";
-import { MiniLatestPost } from "@/components/MiniLatestPost";
-import { MiniGallery } from "@/components/MiniGallery";
-import { Links } from "@/components/Links";
+import Hero from "@/components/hero";
+import LatestPost from "@/components/latest-post";
+import Connect from "@/components/Connect";
+import CapturedMoments from "@/components/Moments";
 
 export default function Page() {
     return (
-        <Fragment>
+        <>
             <Hero/>
-            <MiniLatestPost/>
-            <MiniGallery/>
-            <Links/>
-        </Fragment>
+            <LatestPost/>
+            <CapturedMoments/>
+            <Connect/>
+        </>
     )
 }

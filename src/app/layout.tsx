@@ -1,7 +1,7 @@
 import '@/styles/global.css';
 import React from "react";
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
+import Footer from "@/components/footer";
+import Header from "@/components/header";
 import { Metadata } from "next";
 import { NotoSansSC, Nunito } from "@/lib/font";
 import { ThemeProvider } from "next-themes";
