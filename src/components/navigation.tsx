@@ -15,8 +15,7 @@ const menu = [
 
 export default function Navigation() {
     const pathname = usePathname();
-    // 用于追踪鼠标当前悬停在哪个 Item 上，实现 Desktop 端的跟随效果
-    const [hoveredPath, setHoveredPath] = useState<string|null>(pathname);
+    const [hoveredPath, setHoveredPath] = useState<string|null>(null);
 
     return (
         <nav className="w-full md:w-auto">
@@ -32,7 +31,7 @@ export default function Navigation() {
                             transition={{ duration: 0.2, delay: index * 0.1 }}
                             className="relative w-full md:w-auto"
                             onMouseEnter={() => setHoveredPath(path)}
-                            onMouseLeave={() => setHoveredPath(pathname)}
+                            onMouseLeave={() => setHoveredPath(null)}
                         >
                             <Link
                                 href={path}
@@ -42,7 +41,7 @@ export default function Navigation() {
                                 `}
                             >
                                 {/* 只有当 hover 到当前 item 时才渲染这个背景 */}
-                                {path === hoveredPath && (
+                                {(path === hoveredPath || (!hoveredPath && isActive)) && (
                                     <motion.span
                                         layoutId="nav-item-pill"
                                         className="absolute inset-0 bg-gray-100 dark:bg-white/10 rounded-full -z-10 hidden md:block"
