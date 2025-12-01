@@ -22,7 +22,7 @@ export default function Navigation() {
         <nav className="w-full md:w-auto">
             <div className="flex flex-col md:flex-row items-start md:items-center gap-1 md:gap-2 w-full">
                 {menu.map(({ label, path }, index) => {
-                    const isActive = path === pathname;
+                    const isActive = path === '/' ? pathname === '/' : pathname.startsWith(path);
 
                     return (
                         <motion.div
