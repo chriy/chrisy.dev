@@ -62,7 +62,7 @@ export default function Header() {
                     opacity: visible ? 1 : 0,
                 }}
                 transition={{ duration: 0.3, ease: "easeInOut" }}
-                className="fixed top-6 left-0 right-0 z-50 flex justify-center pointer-events-auto px-2"
+                className="fixed top-6 left-0 right-0 z-40 flex justify-center pointer-events-auto px-2"
             >
                 <motion.div
                     layout
