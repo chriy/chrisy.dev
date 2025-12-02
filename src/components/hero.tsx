@@ -24,7 +24,7 @@ export default function Hero() {
                             highlightClass={"text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600"}
                         >
                             Hi, I'm <span className="font-bold text-gray-900 dark:text-white">Chrisy</span>.
-                            a passionate software engineer crafting digital experiences.
+                            a passionate software engineer. It's really nice to meet you.
                         </SectionHeader>
                     </motion.div>
 
