@@ -26,9 +26,6 @@ body {
     -webkit-text-size-adjust: 100%;
 }
 
-.all-wrapper {
-    @apply w-11/12 sm:w-10/12 md:w-9/12 2xl:w-9/12 max-w-screen-2xl mx-auto md:px-15
-}
 
 /* 全局隐藏滚动条 */
 .no-scrollbar::-webkit-scrollbar {
