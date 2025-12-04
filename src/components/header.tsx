@@ -7,6 +7,7 @@ import Theme from "@/components/theme";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import Navigation from "@/components/navigation";
+import { usePathname } from "next/navigation";
 
 export default function Header() {
     const [visible, setVisible] = useState(true);
@@ -15,8 +16,14 @@ export default function Header() {
     const [colspan, setColspan] = useState(false);
 
     const threshold = 50;
+    const pathname = usePathname();
 
     useEffect(() => {
+        const isPostPage = pathname.includes('/posts');
+        if (!isPostPage) {
+            setVisible(true);
+        }
+
         const updateScroll = () => {
             const currentY = window.scrollY;
             const diff = currentY - lastY.current;
@@ -30,7 +37,9 @@ export default function Header() {
                 setVisible(true);
             } else if (diff > 0) {
                 setColspan(false);
-                // setVisible(false);
+                if (isPostPage) {
+                    setVisible(false);
+                }
             } else {
                 setVisible(true);
             }
@@ -51,7 +60,7 @@ export default function Header() {
             window.removeEventListener("scroll", handleScroll);
             ticking.current = false;
         };
-    }, []);
+    }, [pathname]);
 
     return (
         <header className="w-full h-24 pointer-events-none">
