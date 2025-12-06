@@ -95,6 +95,7 @@ export default function Header() {
                                         alt="Avatar"
                                         fill
                                         className="object-cover"
+                                        loading="eager"
                                     />
                                 </div>
                             </Link>

@@ -11,6 +11,7 @@ export default function Loading() {
                     width={120}
                     height={120}
                     priority
+                    loading="eager"
                     className="rounded-full shadow-lg animate-breathe"
                 />
             </div>
