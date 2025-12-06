@@ -47,7 +47,7 @@ export default function Hero() {
                 >
 
                     {/*背景光晕*/}
-                    <div className="absolute top-1/4 left-0 w-64 h-64 lg:w-96 lg:h-96 bg-blue-400/20 dark:bg-blue-500/10 rounded-full blur-[80px] lg:blur-[128px]"></div>
+                    {/*<div className="absolute top-1/4 left-0 w-64 h-64 lg:w-96 lg:h-96 bg-blue-400/20 dark:bg-blue-500/10 rounded-full blur-[80px] lg:blur-[128px]"></div>*/}
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-cyan-300/20 dark:bg-cyan-400/10 rounded-full blur-[60px]"></div>
 
                     <motion.div
