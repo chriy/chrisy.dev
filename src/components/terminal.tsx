@@ -31,7 +31,7 @@ export default function TerminalWindow() {
             <div className="p-6 text-gray-300 min-h-[200px] flex flex-col gap-2">
                 <div>
                     <span className="text-green-400">➜</span> <span className="text-blue-400">~</span>
-                    <span className="text-gray-400"> Welcome to chrisy's space</span>
+                    <span className="text-gray-400"> System initialized. Terminal ready.</span>
                 </div>
                 <div>
                     <span className="text-green-400">➜</span> <span className="text-blue-400">~</span>
