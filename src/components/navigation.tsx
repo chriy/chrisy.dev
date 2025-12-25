@@ -26,9 +26,9 @@ export default function Navigation() {
                     return (
                         <motion.div
                             key={path}
-                            initial={{ opacity: 0, x: -20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.2, delay: index * 0.1 }}
+                            // initial={{ opacity: 0, x: -20 }}
+                            // animate={{ opacity: 1, x: 0 }}
+                            // transition={{ duration: 0.2, delay: index * 0.1 }}
                             className="relative w-full md:w-auto"
                             onMouseEnter={() => setHoveredPath(path)}
                             onMouseLeave={() => setHoveredPath(null)}
