@@ -20,12 +20,17 @@ export default function TerminalWindow() {
     }, []);
 
     return (
-        <div className="w-full mx-auto lg:mx-0 bg-[#1e1e1e] rounded-xl shadow-2xl overflow-hidden border border-neutral-800 font-mono text-sm sm:text-base">
-            <div className="bg-[#2d2d2d] px-4 py-2 flex items-center gap-2">
+        <div className="relative w-full mx-auto lg:mx-0 dark:bg-black/40 bg-black backdrop-blur-xl rounded-xl shadow-2xl overflow-hidden border border-white/10 font-mono text-sm sm:text-base transition-all duration-300 hover:border-white/20">
+            
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                <div className="h-[150px] w-[200px] rounded-full bg-blue-400 opacity-50 blur-[80px]"></div>
+            </div>
+
+            <div className="border-b border-white/5 px-4 py-2 flex items-center gap-2">
                 <div className="w-3 h-3 rounded-full bg-red-500"></div>
                 <div className="w-3 h-3 rounded-full bg-amber-500"></div>
                 <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                <div className="ml-4 text-gray-400 text-xs select-none">chrisy — zsh — 80x24</div>
+                <div className="ml-4 text-gray-400 text-xs select-none">chrisy@dev-machine — 80x24</div>
             </div>
 
             <div className="p-6 text-gray-300 min-h-[200px] flex flex-col gap-2">
