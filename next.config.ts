@@ -9,10 +9,11 @@ const config: NextConfig = {
         unoptimized: true
     },
     compress: true,
-    pageExtensions: ['tsx', 'md', 'mdx']
+    pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx']
 }
 // md plugins
-const withMDX = createMDX({})
-
+const withMDX = createMDX({
+    extension: /\.mdx?$/
+})
 // merge next config
 export default withMDX(config)
