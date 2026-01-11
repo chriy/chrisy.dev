@@ -11,7 +11,7 @@ export default function BackTop() {
     };
 
     return (
-        <div className="mt-20 pb-6 flex flex-col items-center justify-center gap-4">
+        <div className="mt-20 pb-6 pt-20 flex flex-col items-center justify-center gap-4">
             <span className="text-[10px] tracking-[0.2em] text-zinc-300 dark:text-zinc-600 uppercase">The End</span>
             <button
                 onClick={scrollToTop}

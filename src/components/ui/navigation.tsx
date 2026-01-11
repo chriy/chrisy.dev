@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { clsx } from "clsx";
 
 const menu = [
     { path: '/', label: 'Home' },
@@ -20,7 +21,7 @@ export default function Navigation() {
     return (
         <nav className="w-full md:w-auto">
             <div className="flex flex-col md:flex-row items-start md:items-center gap-1 md:gap-2 w-full">
-                {menu.map(({ label, path }, index) => {
+                {menu.map(({ label, path }) => {
                     const isActive = path === '/' ? pathname === '/' : pathname.startsWith(path);
 
                     return (
@@ -35,10 +36,10 @@ export default function Navigation() {
                         >
                             <Link
                                 href={path}
-                                className={`
-                                    relative block w-full px-4 py-2 rounded-full text-sm font-bold transition-colors duration-200
-                                    ${isActive ? "text-blue-600 dark:text-blue-400" : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100"}
-                                `}
+                                className={clsx(
+                                    "relative block w-full px-4 py-2 rounded-full text-sm font-bold transition-colors duration-200",
+                                    isActive ? "text-blue-600 dark:text-blue-400" : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100"
+                                )}
                             >
                                 {/* 只有当 hover 到当前 item 时才渲染这个背景 */}
                                 {(path === hoveredPath || (!hoveredPath && isActive)) && (

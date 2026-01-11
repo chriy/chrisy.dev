@@ -1,6 +1,7 @@
 'use client'
 
 import React from "react";
+import { clsx } from "clsx";
 
 interface TableProps<T> {
     data: T[];
@@ -21,7 +22,7 @@ export interface Columns<T = any> {
 export default function Table<T extends Record<string, any>>({ data, columns, className }: TableProps<T>) {
     // Empty data
     if (!data || data.length === 0) return (
-        <div className={`p-8 text-center border border-dashed border-zinc-300 dark:border-zinc-700 rounded-lg text-zinc-500 text-sm ${className}`}>
+        <div className={clsx("p-8 text-center border border-dashed border-zinc-300 dark:border-zinc-700 rounded-lg text-zinc-500 text-sm", className)}>
             No data available
         </div>
     );
@@ -32,7 +33,7 @@ export default function Table<T extends Record<string, any>>({ data, columns, cl
     }));
 
     return (
-        <div className={`w-full overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-800 ${className}`}>
+        <div className={clsx("w-full overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-800", className)}>
             <div className="overflow-x-auto">
                 <table className="w-full text-sm text-left">
                     {/* header */}
@@ -41,7 +42,7 @@ export default function Table<T extends Record<string, any>>({ data, columns, cl
                         {header.map((col) => (
                             <th
                                 key={col.key}
-                                className={`px-6 py-3 whitespace-nowrap ${col.align === 'right' ? 'text-right' : col.align === 'center' ? 'text-center' : 'text-left'}`}
+                                className={clsx("px-6 py-3 whitespace-nowrap", col.align === 'right' ? 'text-right' : col.align === 'center' ? 'text-center' : 'text-left')}
                                 style={{ width: col.width }}
                             >
                                 {col.title || col.key}
@@ -61,7 +62,7 @@ export default function Table<T extends Record<string, any>>({ data, columns, cl
                                 return (
                                     <td
                                         key={`${rowIndex}-${col.key}`}
-                                        className={`px-6 py-4 text-zinc-600 dark:text-zinc-300 tabular-nums ${col.align === 'right' ? 'text-right' : col.align === 'center' ? 'text-center' : 'text-left'}`}
+                                        className={clsx("px-6 py-4 text-zinc-600 dark:text-zinc-300 tabular-nums", col.align === 'right' ? 'text-right' : col.align === 'center' ? 'text-center' : 'text-left')}
                                     >
                                         {col.render ? col.render(value, row) : value}
                                     </td>

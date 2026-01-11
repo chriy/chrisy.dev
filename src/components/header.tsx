@@ -3,10 +3,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import logo from '@/images/logo.png';
-import Theme from "@/components/theme";
+import Theme from "@/components/ui/theme";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import Navigation from "@/components/navigation";
+import Navigation from "@/components/ui/navigation";
 import { usePathname } from "next/navigation";
 
 export default function Header() {
