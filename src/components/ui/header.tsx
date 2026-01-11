@@ -81,7 +81,7 @@ export default function Header() {
                         closed: { borderRadius: "50px" }
                     }}
                     transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                    className="relative flex flex-col items-center w-full lg:w-9/12 bg-white/80 rounded-4xl dark:bg-neutral-950/70 backdrop-blur-md border border-neutral-200/50 dark:border-white/10"
+                    className="relative flex flex-col items-center w-full lg:w-9/12 bg-white/80 rounded-4xl dark:bg-neutral-950/70 backdrop-blur-md border-0 border-neutral-200/50 dark:border-white/10"
                 >
                     {/* Top Row: Logo, Nav, Actions */}
                     <div className="flex items-center justify-between w-full h-14 pl-2 pr-4">
