@@ -156,9 +156,7 @@ export const Catalog = () => {
                             onClick={() => scrollToHeading(heading.id)}
                             className={clsx(
                                 "block text-left w-full py-1.5 px-3 rounded-md transition-all duration-200 border-l-2",
-                                // 基础样式
-                                "hover:text-zinc-900 dark:hover:text-zinc-100",
-
+                                "hover:text-zinc-900 dark:hover:text-zinc-100 cursor-pointer",
                                 activeId === heading.id
                                     ? "border-blue-500 text-blue-600 bg-blue-50 dark:bg-blue-900/20 dark:text-blue-400 font-medium translate-x-1"
                                     : "border-transparent text-zinc-500 dark:text-zinc-400 hover:border-zinc-300 dark:hover:border-zinc-700"
