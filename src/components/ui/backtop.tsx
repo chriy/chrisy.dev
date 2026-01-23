@@ -12,7 +12,13 @@ export default function BackTop() {
 
     return (
         <div className="mt-20 pb-6 pt-20 flex flex-col items-center justify-center gap-4">
-            <span className="text-[10px] tracking-[0.2em] text-zinc-300 dark:text-zinc-600 uppercase">The End</span>
+            <div className="flex flex-col items-center gap-2 text-sm md:text-base" onClick={scrollToTop}>
+                <span className="font-medium text-[10px] tracking-[0.2em] text-zinc-300 dark:text-zinc-600 uppercase">The End</span>
+                <span className="group flex items-center mt-4 text-black cursor-pointer dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                    <span className="mr-2 text-blue-500 dark:text-blue-400">➜</span>
+                    <span className="underline font-medium text-md decoration-1 underline-offset-4 decoration-gray-300 dark:decoration-gray-700 group-hover:decoration-blue-500">cd ~/top</span>
+                </span>
+            </div>
             <button
                 onClick={scrollToTop}
                 className="group relative h-32 w-20 flex justify-center items-end cursor-pointer"
