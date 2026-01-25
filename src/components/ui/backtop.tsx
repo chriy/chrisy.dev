@@ -16,7 +16,7 @@ export default function BackTop() {
                 <span className="font-medium text-[10px] tracking-[0.2em] text-zinc-300 dark:text-zinc-600 uppercase">The End</span>
                 <span className="group flex items-center mt-4 text-black cursor-pointer dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                     <span className="mr-2 text-blue-500 dark:text-blue-400">➜</span>
-                    <span className="underline font-medium text-md decoration-1 underline-offset-4 decoration-gray-300 dark:decoration-gray-700 group-hover:decoration-blue-500">cd ~/top</span>
+                    <span className="underline font-medium text-md decoration-1 underline-offset-4 text-neutral-600 dark:text-neutral-400 decoration-gray-300 dark:decoration-gray-700 group-hover:decoration-blue-500">cd ~/top</span>
                 </span>
             </div>
             <button
