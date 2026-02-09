@@ -70,7 +70,7 @@ export const Tag = (
     return (
         <span
             onClick={onClick}
-            className={clsx("inline-flex items-center gap-1.5 rounded-md border font-medium whitespace-nowrap", styles.container, sizeStyles, interactiveStyles, className)}
+            className={clsx("inline-flex items-center gap-1.5 my-1.5 rounded-md border font-medium whitespace-nowrap", styles.container, sizeStyles, interactiveStyles, className)}
         >
             {/* 1. 状态小圆点模式 */}
             {dot && (
