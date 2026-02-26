@@ -6,6 +6,8 @@ dist
 .vscode
 .DS_Store
 *.swp
+.agent
+src/content
 
 # Next.js
 .next
