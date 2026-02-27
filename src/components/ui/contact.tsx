@@ -29,7 +29,7 @@ export default function Contact() {
             iconBg: "bg-amber-50 text-amber-600 dark:bg-amber-900/20 dark:text-amber-500"
         },
         {
-            name: "Location: Hangzhou (UTC +08:00)",
+            name: "Location: UTC+08:00",
             href: "#",
             detail: "Available for on-site & remote opportunities",
             className: "hover:border-purple-200 hover:bg-purple-50/50 dark:hover:border-purple-900 dark:hover:bg-purple-900/10",
