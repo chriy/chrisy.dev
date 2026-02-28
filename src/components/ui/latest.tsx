@@ -47,7 +47,7 @@ export default function LatestPost({ posts }: {posts: Post[]}) {
 
                 {/* 卡片 */}
                 <div className={"pt-18 border-l-zinc-200 border-r-zinc-200"}>
-                    <div className="relative line w-full h-px bg-zinc-300 dark:bg-zinc-800"></div>
+                    <div className="relative line w-full h-px bg-zinc-200 dark:bg-zinc-800"></div>
                     <div className={clsx('w-full mt-12 flex flex-col sm:flex-row items-center justify-center gap-16 md:gap-8')}>
                         {posts.map((post, i) => (
                             <FilmCard key={i} post={post.metadata} index={i}/>
