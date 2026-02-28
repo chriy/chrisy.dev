@@ -8,29 +8,29 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import Navigation from "@/components/ui/navigation";
 import { clsx } from "clsx";
+import { nunito } from "@/lib/font";
 
 export default function Header() {
     const [colspan, setColspan] = useState(false);
     return (
-        <header className="sticky top-0 z-50 w-full bg-theme-light/0 dark:bg-theme-dark/0 backdrop-blur-md">
-            <div className="mx-auto max-w-360 m-h-20 sm:py-4 py-1">
-                <div className="flex items-center justify-between w-full h-14 pl-2 pr-4">
-
+        <header className={clsx("sticky top-0 sm:top-6 z-50 w-full px-1 transition-all duration-300 select-none", nunito.className)}>
+            <div className="mx-auto w-full sm:w-fit m-h-16 sm:mt-6 sm:py-1 py-1 px-1 sm:rounded-full sm:border border-neutral-200/50 dark:border-white/10 shadow-xs shadow-neutral-200/20 dark:shadow-neutral-950/10 backdrop-blur-md bg-theme-light/60 dark:bg-theme-dark/60">
+                <div className="flex items-center justify-between w-full h-12 pl-1 pr-4">
                     {/* Left: Logo area */}
                     <div className="flex items-center gap-3">
-                        <Link href="/" className="relative block shrink-0">
-                            <div className="relative w-10 h-10 overflow-hidden rounded-full">
+                        <Link href="/" className="group flex items-center gap-3">
+                            <div className="relative w-10 h-10 overflow-hidden rounded-full ring-2 ring-white/20 dark:ring-white/10 group-hover:ring-blue-500/50 transition-all duration-300">
                                 <Image
                                     src={logo}
                                     alt="Avatar"
                                     fill
-                                    className="object-cover"
+                                    className="object-cover group-hover:scale-110 transition-transform duration-500"
                                     loading="eager"
                                 />
                             </div>
-                        </Link>
-                        <Link href="/" className="text-md lg:text-lg font-bold text-neutral-700 dark:text-neutral-200 tracking-tight hover:opacity-80 transition-opacity">
-                            Chrisy<span className="text-blue-500">.dev</span>
+                            <span className="text-md lg:text-lg font-extrabold text-neutral-800 dark:text-neutral-100 tracking-tight transition-all">
+                                Chrisy<span className="bg-clip-text text-transparent bg-linear-to-r from-blue-600 to-blue-400 dark:from-blue-500 dark:to-cyan-400">.dev</span>
+                            </span>
                         </Link>
                     </div>
 
@@ -41,7 +41,6 @@ export default function Header() {
 
                     {/* Right: Theme & Hamburger */}
                     <div className="flex items-center gap-3">
-
                         <div className="scale-90 sm:scale-100">
                             <Theme/>
                         </div>
@@ -93,7 +92,7 @@ export default function Header() {
                             transition={{ duration: 0.3, ease: "easeInOut" }}
                             className="w-full overflow-hidden md:hidden"
                         >
-                            <div className="p-4 border-t border-neutral-100 dark:border-white/5 flex flex-col items-center gap-4 pb-6">
+                            <div className="p-4 border-t border-neutral-100 dark:border-white/5 flex flex-col items-center gap-4 pb-10">
                                 <Navigation/>
                             </div>
                         </motion.div>
