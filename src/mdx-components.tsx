@@ -1,19 +1,47 @@
 import { MDXComponents } from "mdx/types";
-import { H2, P, Strong } from "@/components/mdx/article";
-import React from "react";
+import {
+    A,
+    B,
+    Blockquote,
+    Code,
+    CodeBlock,
+    CustomHR,
+    DeleteLine,
+    H1,
+    H2,
+    H3,
+    H4,
+    Italic,
+    Li,
+    Ol,
+    P,
+    Ul,
+    Underline
+} from "@/components/mdx/article";
+import Image from "next/image";
 
-const components: MDXComponents = {
-    h1: H2,
-    h2: ({ children }) => (
-        <h2 className="group text-2xl font-bold mt-12 mb-6 flex items-center scroll-mt-24 cursor-pointer gap-2">
-            <span className="text-blue-500 group-hover:opacity-70 font-extrabold">#&nbsp;</span>
-            {children}
-        </h2>
-    ),
-    b: Strong,
-    p: P
-} satisfies MDXComponents
-
-export function useMDXComponents(): MDXComponents {
-    return components
+export function useMDXComponents(components: MDXComponents): MDXComponents {
+    return {
+        h1: H1,
+        h2: H2,
+        h3: H3,
+        h4: H4,
+        hr: CustomHR,
+        b: B,
+        img: Image,
+        strong: B,
+        p: P,
+        a: A,
+        em: Italic,
+        i: Italic,
+        ul: Ul,
+        ol: Ol,
+        li: Li,
+        u: Underline,
+        blockquote: Blockquote,
+        code: Code,
+        pre: CodeBlock,
+        del: DeleteLine,
+        ...components,
+    }
 }
