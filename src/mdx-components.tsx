@@ -3,10 +3,8 @@ import {
     A,
     B,
     Blockquote,
-    Code,
-    CodeBlock,
-    CustomHR,
     DeleteLine,
+    EoFLine,
     H1,
     H2,
     H3,
@@ -19,6 +17,7 @@ import {
     Underline
 } from "@/components/mdx/article";
 import Image from "next/image";
+import { Code, CodeBlock } from "@/components/mdx/code";
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
     return {
@@ -26,7 +25,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         h2: H2,
         h3: H3,
         h4: H4,
-        hr: CustomHR,
+        hr: EoFLine,
         b: B,
         img: Image,
         strong: B,
