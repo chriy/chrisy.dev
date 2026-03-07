@@ -13,7 +13,7 @@ import { nunito } from "@/lib/font";
 export default function Header() {
     const [colspan, setColspan] = useState(false);
     return (
-        <header className={clsx("sticky top-0 sm:top-6 z-50 w-full px-1 transition-all duration-300 select-none", nunito.className)}>
+        <header className={ clsx("sticky top-0 z-50 w-full px-1 transition-all duration-300 select-none", nunito.className) }>
             <div className="mx-auto w-full sm:w-fit m-h-16 sm:mt-6 sm:py-1 py-1 px-1 sm:rounded-full sm:border border-neutral-200/50 dark:border-white/10 shadow-xs shadow-neutral-200/20 dark:shadow-neutral-950/10 backdrop-blur-md bg-theme-light/60 dark:bg-theme-dark/60">
                 <div className="flex items-center justify-between w-full h-12 pl-1 pr-4">
                     {/* Left: Logo area */}

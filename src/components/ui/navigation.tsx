@@ -15,13 +15,18 @@ const menu = [
 
 export default function Navigation() {
     const pathname = usePathname();
-    const [hoveredPath, setHoveredPath] = useState<string|null>(null);
+    const [hoveredPath, setHoveredPath] = useState<string | null>(null);
 
     return (
         <nav className="w-full md:w-auto">
-            <div className="flex flex-col md:flex-row items-start md:items-center gap-1 md:gap-2 w-full">
+            <div
+                className="flex flex-col md:flex-row items-start md:items-center gap-1 md:gap-2 w-full"
+                onMouseLeave={ () => setHoveredPath(null) }
+            >
                 {menu.map(({ label, path }, index) => {
                     const isActive = path === '/' ? pathname === '/' : pathname.startsWith(path);
+                    const isHighlighted = path === hoveredPath || (!hoveredPath && isActive);
+
                     return (
                         <motion.div
                             key={path}
@@ -34,31 +39,30 @@ export default function Navigation() {
                             }}
                             className="relative w-full md:w-auto"
                             onMouseEnter={() => setHoveredPath(path)}
-                            onMouseLeave={() => setHoveredPath(null)}
                         >
                             <Link
                                 href={path}
                                 className={clsx(
-                                    "relative block w-full px-6 py-2 rounded-full text-[14px] font-extrabold transition-colors duration-200", maple.className,
-                                    isActive ? "text-blue-600 dark:text-blue-400" : "text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-gray-100"
+                                    "relative block w-full px-6 py-2 rounded-full text-[14px] font-extrabold transition-colors duration-100 text-left md:text-center", maple.className,
+                                    isHighlighted
+                                        ? "text-white"
+                                        : "text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white"
                                 )}
                             >
-                                {/* 只有当 hover 到当前 item 时才渲染这个背景 */}
-                                {(path === hoveredPath || (!hoveredPath && isActive)) && (
+                                { isHighlighted && (
                                     <motion.span
                                         layoutId="nav-item-pill"
-                                        className="absolute inset-0 bg-zinc-100 dark:bg-white/10 rounded-full -z-10 hidden md:block"
+                                        className="absolute inset-0 bg-zinc-950 dark:bg-white/10 rounded-full -z-10 hidden md:block"
                                         transition={{
                                             type: "spring",
-                                            stiffness: 300,
-                                            damping: 30
+                                            stiffness: 500,
+                                            damping: 35
                                         }}
                                     />
                                 )}
 
-                                {/* --- Mobile 端的静态高亮背景 (不需要滑动) --- */}
                                 {isActive && (
-                                    <span className="absolute inset-0 bg-gray-100 dark:bg-white/10 rounded-lg -z-10 md:hidden"></span>
+                                    <span className="absolute inset-0 bg-zinc-950 dark:bg-white/10 rounded-lg -z-10 md:hidden w-full"></span>
                                 )}
 
                                 <span className="relative z-10">{label}</span>
