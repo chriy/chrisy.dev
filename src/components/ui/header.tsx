@@ -13,8 +13,8 @@ import { nunito } from "@/lib/font";
 export default function Header() {
     const [colspan, setColspan] = useState(false);
     return (
-        <header className={ clsx("sticky top-0 z-50 w-full px-1 transition-all duration-300 select-none", nunito.className) }>
-            <div className="mx-auto w-full sm:w-fit m-h-16 sm:mt-6 sm:py-1 py-1 px-1 sm:rounded-full sm:border border-neutral-200/50 dark:border-white/10 shadow-xs shadow-neutral-200/20 dark:shadow-neutral-950/10 backdrop-blur-md bg-theme-light/60 dark:bg-theme-dark/60">
+        <header className={clsx("sticky top-0 z-50 w-full px-1 transition-all duration-300 select-none", nunito.className)}>
+            <div className="mx-auto w-full sm:w-fit m-h-16 sm:mt-6 sm:py-1 py-1 px-1 sm:rounded-full sm:border border-white/40 dark:border-white/10 shadow-md shadow-neutral-200/20 dark:shadow-black/40 backdrop-blur-xl backdrop-saturate-150 bg-white/60 dark:bg-[#09090b]/60 transition-colors">
                 <div className="flex items-center justify-between w-full h-12 pl-1 pr-4">
                     {/* Left: Logo area */}
                     <div className="flex items-center gap-3">
@@ -36,13 +36,13 @@ export default function Header() {
 
                     {/* Center: Desktop Navigation */}
                     <div className="hidden md:flex items-center justify-center flex-1 px-8">
-                        <Navigation/>
+                        <Navigation />
                     </div>
 
                     {/* Right: Theme & Hamburger */}
                     <div className="flex items-center gap-3">
                         <div className="scale-90 sm:scale-100">
-                            <Theme/>
+                            <Theme />
                         </div>
 
                         {/* Mobile Hamburger */}
@@ -93,7 +93,7 @@ export default function Header() {
                             className="w-full overflow-hidden md:hidden"
                         >
                             <div className="p-4 border-t border-neutral-100 dark:border-white/5 flex flex-col items-center gap-4 pb-10">
-                                <Navigation/>
+                                <Navigation />
                             </div>
                         </motion.div>
                     )}
