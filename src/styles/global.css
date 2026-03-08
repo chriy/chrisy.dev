@@ -1,38 +1,62 @@
 @import "./animate.css";
+@import "./shiki.css";
 @import "./theme.css";
 @import "tailwindcss";
 
-*,
-::before,
-::after {
-    box-sizing: border-box;
+@custom-variant dark (&:is(.dark *));
+
+.container-root {
+    @apply container mx-auto p-6 md:p-16 2xl:max-w-360;
 }
 
-
-html {
-    font-size: 16px;
+:root {
+    --font-nunito-en: initial;
+    --font-noto-sans-sc: initial;
+    --font-maple-en: initial;
 }
 
-
-body {
-    margin: 0;
-    padding: 0;
-    font-family: "Nunito", "Noto Sans SC", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-    font-size: 1rem;
-    line-height: 1.5;
-    font-weight: 400;
-    font-style: normal;
-    font-optical-sizing: auto;
-    -webkit-text-size-adjust: 100%;
+@theme {
+    --font-sans: var(--font-nunito-en), var(--font-noto-sans-sc), ui-sans-serif, system-ui;
+    --font-mono: var(--font-maple-en), var(--font-noto-sans-sc), ui-monospace, monospace;
 }
 
+@layer base {
 
-/* 全局隐藏滚动条 */
-.no-scrollbar::-webkit-scrollbar {
-    display: none;
-}
+    html {
+        font-size: 16px;
+    }
 
-.no-scrollbar {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
+    body {
+        margin: 0;
+        padding: 0;
+        font-weight: 460;
+        font-size: 1rem;
+        line-height: 1.6;
+        font-style: normal;
+        font-optical-sizing: auto;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-text-size-adjust: 100%;
+        font-variant-ligatures: normal;
+    }
+
+    *,
+    ::before,
+    ::after {
+        box-sizing: border-box;
+    }
+
+    /* 全局隐藏滚动条 */
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+
+    .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+    code, pre {
+        font-weight: 500;
+    }
 }

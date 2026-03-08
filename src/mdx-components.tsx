@@ -17,6 +17,7 @@ import {
     Underline
 } from "@/components/mdx/article";
 import Image from "next/image";
+import { Highlight } from "@/components/mdx/highlight";
 import { Code, CodeBlock } from "@/components/mdx/code";
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
@@ -28,7 +29,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         hr: EoFLine,
         b: B,
         img: Image,
-        strong: B,
+        strong: Highlight,
         p: P,
         a: A,
         em: Italic,

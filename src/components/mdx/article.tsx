@@ -196,12 +196,6 @@ export const A = ({ children, href }: { children: React.ReactNode, href: string 
 };
 
 
-// 强调加粗
-export const Strong = ({ children }: { children: React.ReactNode }) => (
-    <strong className="font-semibold text-amber-500 dark:text-amber-600 ">【{ children }】</strong>
-);
-
-
 export const EM = ({ children }: { children: React.ReactNode }) => (
     <em className="italic font-serif pr-1">{ children }</em>
 );

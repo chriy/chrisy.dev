@@ -1,0 +1,55 @@
+@layer components {
+    .shiki-renderer .shiki {
+        background-color: transparent !important;
+        margin: 0 !important;
+        padding: 1rem 1.25rem !important;
+        /* py-5 px-6 等效 */
+        font-size: 0.875rem !important;
+        line-height: 1.6 !important;
+    }
+
+    .shiki-renderer .shiki pre {
+        background-color: transparent !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        overflow: visible !important;
+    }
+
+    .shiki-renderer .shiki,
+    .shiki-renderer .shiki span,
+    .shiki-renderer .shiki code {
+        font-family: inherit !important;
+    }
+
+    /* 行号支持 */
+    .shiki-renderer .shiki code {
+        counter-reset: line;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    .shiki-renderer .shiki .line {
+        display: inline-block !important;
+        width: 100% !important;
+    }
+
+    .shiki-renderer .shiki .line:last-child:empty {
+        display: none !important;
+    }
+
+    .shiki-renderer .shiki .line::before {
+        counter-increment: line;
+        content: counter(line);
+        display: inline-block !important;
+        width: 1.5rem !important;
+        margin-right: 1.5rem !important;
+        text-align: right !important;
+        color: rgb(113 113 122 / 0.4) !important;
+        user-select: none !important;
+    }
+
+    .shiki-wrap .shiki {
+        white-space: pre-wrap !important;
+        word-break: break-all !important;
+    }
+}
