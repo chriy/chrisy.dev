@@ -2,55 +2,62 @@
 
 import React, { useRef } from 'react';
 import Link from 'next/link';
-import { motion, useInView } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { ArrowUpRight, Paperclip, Terminal } from 'lucide-react';
 import { clsx } from "clsx";
 import { maple, nunito } from "@/lib/font";
 import { Tag } from "@/components/mdx/tag";
-import { Post, PostMetadata } from "@/lib/posts";
+import { Post } from "@/lib/posts";
 
 export default function LatestPost({ posts }: {posts: Post[]}) {
     return (
         <section className="overflow-hidden bg-theme-light dark:bg-theme-dark transition-colors duration-500 md:-mt-20">
             <div className="container-root">
-                {/* 标题 */}
-                <div>
-                    <div className="flex items-center justify-start gap-3 mb-4 pl-1">
-                        <Terminal className="text-indigo-500" size={16}/>
-                        <span className="text-[12px] tracking-[0.2em] text-zinc-400 dark:text-zinc-600 lowercase">
-                            ~/chrisy/blog/archive
-                      </span>
+                <div className="mb-12">
+                    <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-6">
+                            <div className="flex items-center gap-2 px-3 py-1">
+                                <Terminal className="text-indigo-500" size={ 12 }/>
+                                <span className="text-[12px] font-mono tracking-wider text-zinc-500 dark:text-zinc-400 lowercase">
+                                    ~/chrisy/blog/archive
+                                </span>
+                            </div>
+                        </div>
                     </div>
 
-                    {/* 命令行 */}
-                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-                        <div className="group h-full">
-                            <h2 className={clsx("text-4xl font-mono font-bold tracking-tighter text-zinc-900 dark:text-zinc-100 flex items-center", maple.className)}>
-                                <span className="text-indigo-500 mr-4 select-none">$</span>
-                                <div className="flex items-center gap-3">
-                                    <span className="text-indigo-500">tail</span>
-                                    <span className="text-zinc-400 dark:text-zinc-600 w-10">-n</span>
-                                    <span className="text-indigo-500">5</span>
-                                    <span className="mr-2">~/posts</span>
-                                </div>
+                    <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
+                        <div className="group relative">
+                            <h2 className={ clsx(
+                                "relative text-3xl md:text-4xl font-mono font-bold tracking-tight flex items-center flex-wrap gap-y-2",
+                                "text-zinc-900 dark:text-zinc-100",
+                                maple.className
+                            ) }>
+                                <span className="text-indigo-500/40 mr-3 select-none">❯</span>
+                                <span className="text-indigo-500">tail</span>
+                                <span className="text-zinc-400 dark:text-zinc-600 mx-3">-n</span>
+                                <span className="text-emerald-500 dark:text-emerald-400">5</span>
+                                <span className="ml-4 text-zinc-800 dark:text-zinc-200">~/posts</span>
 
                                 <motion.div
-                                    animate={{ opacity: [1, 0, 1] }}
-                                    transition={{ duration: 2, repeat: Infinity }}
-                                    className="w-2 h-10 bg-indigo-500 ml-4 mt-2 mx-auto shadow-[0_0_10px_rgba(6,182,212,0.5)]"
+                                    animate={ {
+                                        opacity: [1, 0, 1],
+                                    } }
+                                    transition={ { duration: 1.5, repeat: Infinity } }
+                                    className="w-2.5 h-8 md:h-9 bg-indigo-500 ml-4 shadow-[0_0_15px_rgba(99,102,241,0.5)]"
                                 />
                             </h2>
                         </div>
-                        <Bot/>
+                        <div className="translate-y-2">
+                            <Bot/>
+                        </div>
                     </div>
                 </div>
 
-                {/* 卡片 */}
-                <div className={"pt-18 border-l-zinc-200 border-r-zinc-200"}>
+                <div className={ "pt-20" }>
                     <div className="relative line w-full h-px bg-zinc-200 dark:bg-zinc-800"></div>
-                    <div className={clsx('w-full mt-12 flex flex-col sm:flex-row items-center justify-center gap-16 md:gap-8')}>
+                    <div className={ clsx('w-full flex flex-row items-start justify-start gap-8 md:gap-12', 'overflow-x-auto no-scrollbar px-1', '-mt-16 pt-28') }>
                         {posts.map((post, i) => (
-                            <FilmCard key={i} post={post.metadata} index={i}/>
+                            <FilmCard key={ i } post={ post } index={ i }/>
                         ))}
                     </div>
                 </div>
@@ -60,19 +67,14 @@ export default function LatestPost({ posts }: {posts: Post[]}) {
 }
 
 
-const FilmCard = ({ post, index }: {post: PostMetadata, index: number}) => {
+const FilmCard = ({ post, index }: { post: Post, index: number }) => {
     const deg = index % 2 === 0 ? 1 : -1;
     const sensorRef = useRef(null);
-    // amount: 0.5 代表“至少有 50% 暴露在屏幕内才算 isInView 为 true”
-    // 当窗口缩小，卡片有 50% 以上被切掉时，isInView 就会变成 false
-    const isInView = useInView(sensorRef, { amount: 0.5 });
 
     return (
         <div ref={sensorRef} className="relative flex flex-col items-center shrink-0 w-64 group">
             <motion.div
-                initial={{ opacity: 0, y: 50 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-                whileHover={{ translateY: -30 }}
+                whileHover={ { y: -25 } }
                 transition={{
                     type: "spring",
                     stiffness: 260,
@@ -88,53 +90,44 @@ const FilmCard = ({ post, index }: {post: PostMetadata, index: number}) => {
                     }}
                     style={{ transformOrigin: 'top center' }}
                 >
-                    {/* 胶片夹子 */}
-                    <div className="absolute -top-16 left-28 z-20 flex flex-col items-center">
+                    <div className="absolute -top-20 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center">
                         <div className="w-8 h-8 bg-zinc-200 dark:bg-zinc-800 rounded flex items-center justify-center shadow-md group-hover:bg-indigo-400 dark:group-hover:bg-indigo-400 transition-colors duration-300">
                             <Paperclip size={16} className="text-zinc-500 dark:text-zinc-400 group-hover:text-white dark:group-hover:text-white"/>
                         </div>
                         <div className="w-px h-12 bg-zinc-300 dark:bg-zinc-700"></div>
                     </div>
-                    <Link href={'#'} className="block cursor-pointer">
-                        <div className={clsx("relative flex flex-col justify-between min-w-64 min-h-80 px-6 py-10 overflow-hidden")}>
-                            {/* 胶卷孔洞 */}
-                            <FilmSprockets className="top-0 bg-black/65 dark:bg-black border-b border-zinc-200 dark:border-white/10"/>
-                            <FilmSprockets className="bottom-0 bg-black/65 dark:bg-black border-t border-zinc-200 dark:border-white/10"/>
-                            {/* 背景大水印 */}
+                    <Link href={ post.slug } className="block cursor-pointer">
+                        <div className={ clsx(
+                            "relative flex flex-col justify-between min-w-64 min-h-80 px-6 py-10 overflow-hidden",
+                            "bg-white/80 dark:bg-transparent shadow-2xl shadow-zinc-200/60 dark:shadow-none border border-zinc-100/50 dark:border-transparent rounded-xs"
+                        ) }>
+                            <FilmSprockets className="top-0 bg-zinc-900 dark:bg-black border-b border-zinc-200 dark:border-white/10"/>
+                            <FilmSprockets className="bottom-0 bg-zinc-900 dark:bg-black border-t border-zinc-200 dark:border-white/10"/>
                             <span className="absolute -right-4 bottom-4 text-9xl font-black text-black/5 dark:text-white/5 select-none rotate-30 scale-200 -translate-y-8">{index + 1}</span>
-
-                            {/* 顶部信息 */}
                             <div className="relative z-10 flex justify-between items-center">
-                                <span className="text-[10px] font-mono text-zinc-500 font-bold">POST_{index}</span>
-                                {post.tags?.length && (
-                                    <Tag children={post.tags.at(0)} variant={'info'} size={"sm"}/>
+                                <span className="text-[10px] font-mono text-zinc-500 font-bold uppercase tracking-tight">POST_{ index.toString().padStart(2, '0') }</span>
+                                { post.metadata.tags?.length && (
+                                    <Tag children={ post.metadata.tags.at(0) } variant={ 'info' } size={ "sm" }/>
                                 )}
                             </div>
-
-                            {/* 中间文字 (显影效果) */}
                             <div className="relative z-10 mt-auto mb-8 space-y-2">
-                                {/* 线条 */}
                                 <div className="w-8 h-px bg-indigo-400 group-hover:w-full transition-all duration-800"></div>
                                 <h3 className={clsx(
-                                    "text-3xl font-bold italic leading-none transition-all duration-800 my-4",
-                                    "text-zinc-400 grayscale-100 blur-[0px] group-hover:text-indigo-400 group-hover:blur-[0px] group-hover:grayscale-0",
-                                    "dark:text-indigo-400",
+                                    "text-3xl font-bold italic leading-none transition-all duration-700 my-4",
+                                    "text-zinc-700 grayscale-[0.5] group-hover:text-indigo-600 group-hover:grayscale-0",
+                                    "dark:text-indigo-400 dark:group-hover:text-indigo-300",
                                     nunito.className
                                 )}>
-                                    {post.title}
+                                    { post.metadata.title }
                                 </h3>
                                 <p className={clsx("text-xs text-zinc-500 opacity-0 transition-opacity duration-500", "group-hover:opacity-100")}>
-                                    {post.summary}
+                                    { post.metadata.summary }
                                 </p>
                             </div>
-
-                            {/* 底部 */}
                             <div className="relative z-10 border-t border-dashed border-zinc-400/30 pt-4 flex justify-between items-center">
-                                <span className="text-[10px] font-mono text-zinc-400 group-hover:text-zinc-600">{post.date}</span>
+                                <span className="text-[10px] font-mono text-zinc-400 group-hover:text-zinc-600">{ post.metadata.date }</span>
                                 <ArrowUpRight size={14} className="text-zinc-400 group-hover:text-indigo-400"/>
                             </div>
-
-                            {/* 发光边框 (Hover) */}
                             <div className="absolute inset-0 border-2 border-transparent group-hover:border-indigo-400/10 pointer-events-none"></div>
 
                         </div>
@@ -152,8 +145,8 @@ const FilmSprockets = ({ className = "" }: {className?: string}) => {
                 <div
                     key={i}
                     className={clsx("w-3 h-4 rounded-xs transition-all duration-500",
-                        "bg-white border border-zinc-300 shadow-sm",
-                        "dark:bg-zinc-800 dark:border-zinc-700",
+                        "bg-zinc-100 border border-zinc-400/20 shadow-[inset_0_1.5px_3px_rgba(0,0,0,0.2)]",
+                        "dark:bg-zinc-800 dark:border-zinc-700 dark:shadow-none",
                     )}></div>
             ))}
         </div>

@@ -1,15 +1,15 @@
-import Hero from "@/components/hero";
-import LatestPost from "@/components/latest-post";
-import Connect from "@/components/connect";
-import CapturedMoments from "@/components/moments";
+import Hero from "@/components/ui/hero";
+import LatestPosts from "@/components/ui/latest";
+import { PostsContext } from "@/lib/posts";
+import Contact from "@/components/ui/contact";
 
-export default function Page() {
+export default async function Page() {
+    const posts = await PostsContext.all({ limit: 5 })
     return (
-        <>
+        <section>
             <Hero/>
-            <LatestPost/>
-            <CapturedMoments/>
-            <Connect/>
-        </>
+            <LatestPosts posts={ posts }/>
+            <Contact/>
+        </section>
     )
 }
