@@ -1,6 +1,6 @@
 'use client'
 
-import { ArrowUpRight, Mail, MapPin, Radio } from "lucide-react";
+import { Mail, MapPin, Radio } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import { clsx } from "clsx";
@@ -16,7 +16,7 @@ export default function Contact() {
             name: 'GitHub',
             href: 'https://github.com/chriy',
             detail: 'View my code & open source contributions',
-            className: "hover:border-amber-200 hover:bg-amber-50/50 dark:hover:border-amber-900 dark:hover:bg-amber-900/10",
+            className: "hover:border-zinc-200 hover:bg-zinc-50/50 dark:hover:border-zinc-800 dark:hover:bg-zinc-800/10",
             iconBg: "bg-neutral-100 text-neutral-900 dark:bg-neutral-900 dark:text-white",
             icon: <FaGithub size={32}/>
         },
@@ -56,10 +56,10 @@ export default function Contact() {
                         <span className="text-blue-500 animate-pulse">_</span>
                     </h2>
                     <p className={clsx('italic mt-8 text-md max-w-sm dark:text-zinc-500 text-zinc-400', maple.className)}>
-                        Let's connect and build something amazing together.
+                        Hello. Nice to meet you.
                     </p>
                     <p className={clsx(' mt-8 text-md max-w-sm dark:text-zinc-500 text-zinc-400', maple.className)}>
-                        如果你有想法，一起做一些有趣的事情吧
+                        很高兴认识你，欢迎随时联系。
                     </p>
                 </div>
                 <div className="flex-1 flex flex-col justify-between py-16">
@@ -85,12 +85,6 @@ export default function Contact() {
                                     <p className="text-xs font-medium text-neutral-500 dark:text-neutral-500 mt-0.5">
                                         {link.detail}
                                     </p>
-                                </div>
-
-                                <div className="text-neutral-300 dark:text-neutral-600 group-hover:text-neutral-900 dark:group-hover:text-white group-hover:translate-x-1 transition-all duration-300">
-                                    <div className={`w-12 h-12 rounded-full border flex items-center justify-center transition-all duration-500  dark:border-zinc-800 dark:group-hover:bg-white dark:group-hover:text-black border-zinc-200 group-hover:bg-black group-hover:text-white`}>
-                                        <ArrowUpRight size={20} className="group-hover:scale-110 transition-transform"/>
-                                    </div>
                                 </div>
                             </Link>
                         </motion.div>
