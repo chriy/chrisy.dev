@@ -113,9 +113,9 @@ const FilmCard = ({ post, index }: { post: Post, index: number }) => {
                             <div className="relative z-10 mt-auto mb-8 space-y-2">
                                 <div className="w-8 h-px bg-indigo-400 group-hover:w-full transition-all duration-800"></div>
                                 <h3 className={clsx(
-                                    "text-3xl font-bold italic leading-none transition-all duration-700 my-4",
-                                    "text-zinc-700 grayscale-[0.5] group-hover:text-indigo-600 group-hover:grayscale-0",
-                                    "dark:text-indigo-400 dark:group-hover:text-indigo-300",
+                                    "text-3xl font-bold italic leading-tight transition-all duration-700 my-4",
+                                    "text-zinc-600 group-hover:text-zinc-950",
+                                    "dark:text-zinc-400 dark:group-hover:text-white",
                                     nunito.className
                                 )}>
                                     { post.metadata.title }
