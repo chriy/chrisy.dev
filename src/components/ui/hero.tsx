@@ -8,7 +8,7 @@ import { LineDivider } from "@/components/mdx/article";
 
 export default function Hero() {
     return (
-        <section className={"container-root min-h-screen pt-12 sm:pt-16 md:pt-20 lg:pt-24"}>
+        <section className={"container-root pt-12 sm:pt-16 md:pt-20 lg:pt-24"}>
             <div className="flex items-center gap-4 mb-10 translate-x-1">
                 <span className="h-px w-12 bg-zinc-600"></span>
                 <span className="text-[12px] font-bold uppercase tracking-[0.2em] text-gray-500">
