@@ -11,7 +11,7 @@ import { Post } from "@/lib/posts";
 
 export default function LatestPost({ posts }: {posts: Post[]}) {
     return (
-        <section className="overflow-hidden bg-theme-light dark:bg-theme-dark transition-colors duration-500 md:-mt-20">
+        <section className="overflow-hidden bg-theme-light dark:bg-theme-dark transition-colors duration-500">
             <div className="container-root">
                 <div className="mb-12">
                     <div className="flex items-center justify-between">
