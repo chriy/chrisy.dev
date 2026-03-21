@@ -35,7 +35,7 @@ export const ArticleLayout = ({ children, meta }: { children: React.ReactNode, m
     }, [children]); // 当 children 变化时重新检测 (或者依赖 meta.title/pathname)
 
     return (
-        <article className={ clsx("container-root w-full max-w-5xl mx-auto px-4 py-12 sm:py-16 font-sans antialiased text-zinc-800 dark:text-zinc-200", maple.className) }>
+        <article className={ clsx("w-full max-w-6xl mx-auto px-4 py-12 sm:py-16 font-sans antialiased text-zinc-800 dark:text-zinc-200", maple.className) }>
             <div className="v-title mb-10 text-center">
                 <h1 className={ clsx("text-3xl sm:text-4xl font-bold tracking-tight mb-4 text-zinc-700 dark:text-zinc-100 wrap-break-word") }>
                     { meta.title }
