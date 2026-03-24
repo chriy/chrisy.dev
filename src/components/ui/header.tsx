@@ -13,7 +13,7 @@ import { nunito } from "@/lib/font";
 export default function Header() {
     const [colspan, setColspan] = useState(false);
     return (
-        <header className={ clsx("sticky top-0 z-50 w-full transition-all duration-300 select-none", nunito.className) }>
+        <header className={clsx("sticky top-0 z-50 w-full transition-all duration-300 select-none", nunito.className)}>
             <div className="mx-auto w-full sm:w-fit m-h-16 sm:mt-6 sm:py-1 py-1 px-1 sm:rounded-full sm:border border-white/40 dark:border-white/10 shadow-md shadow-neutral-200/20 dark:shadow-black/40 backdrop-blur-xl backdrop-saturate-150 bg-white/60 dark:bg-[#09090b]/60 transition-colors">
                 <div className="flex items-center justify-between w-full h-12 pl-1 pr-4">
                     {/* Left: Logo area */}
@@ -35,13 +35,16 @@ export default function Header() {
                     </div>
 
                     {/* Center: Desktop Navigation */}
-                    <div className="hidden md:flex items-center justify-center flex-1 px-8">
+                    <div className="hidden md:flex items-center justify-center flex-1 px-4">
                         <Navigation />
                     </div>
 
+                    {/* Structural Divider 2 */}
+                    <div className="hidden md:block w-px h-4 bg-zinc-200 dark:bg-zinc-800 mx-4 opacity-100" />
+
                     {/* Right: Theme & Hamburger */}
                     <div className="flex items-center gap-3">
-                        <div className="scale-90 sm:scale-100">
+                        <div className="scale-90 sm:scale-100 px-1">
                             <Theme />
                         </div>
 

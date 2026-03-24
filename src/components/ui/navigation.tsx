@@ -8,9 +8,8 @@ import { clsx } from "clsx";
 import { maple } from "@/lib/font";
 
 const menu = [
-    { path: '/', label: 'Home' },
-    { path: '/posts', label: 'Posts' },
-    { path: '/about', label: 'About' }
+    { path: '/', label: '~/' },
+    { path: '/posts', label: '~/posts' }
 ]
 
 export default function Navigation() {
@@ -21,7 +20,7 @@ export default function Navigation() {
         <nav className="w-full md:w-auto">
             <div
                 className="flex flex-col md:flex-row items-start md:items-center gap-1 md:gap-2 w-full"
-                onMouseLeave={ () => setHoveredPath(null) }
+                onMouseLeave={() => setHoveredPath(null)}
             >
                 {menu.map(({ label, path }, index) => {
                     const isActive = path === '/' ? pathname === '/' : pathname.startsWith(path);
@@ -49,7 +48,7 @@ export default function Navigation() {
                                         : "text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white"
                                 )}
                             >
-                                { isHighlighted && (
+                                {isHighlighted && (
                                     <motion.span
                                         layoutId="nav-item-pill"
                                         className="absolute inset-0 bg-zinc-950 dark:bg-white/10 rounded-full -z-10 hidden md:block"
