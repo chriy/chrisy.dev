@@ -5,6 +5,7 @@ import createMDX from '@next/mdx'
 const config: NextConfig = {
     output: 'export',
     distDir: 'dist',
+    trailingSlash: false,
     images: {
         unoptimized: true
     },
