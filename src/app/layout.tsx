@@ -13,9 +13,7 @@ export const viewport: Viewport = {
         { media: '(prefers-color-scheme: dark)', color: '#09090b' },
     ],
     width: 'device-width',
-    initialScale: 1,
-    maximumScale: 1,
-    userScalable: false,
+    initialScale: 1
 }
 
 export const metadata: Metadata = {
