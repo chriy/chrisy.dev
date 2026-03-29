@@ -22,7 +22,7 @@ export interface Columns<T = any> {
 export default function Table<T extends Record<string, any>>({ data, columns, className }: TableProps<T>) {
     // Empty data
     if (!data || data.length === 0) return (
-        <div className={clsx("p-8 text-center border border-dashed border-zinc-300 dark:border-zinc-700 rounded-lg text-zinc-500 text-sm", className)}>
+        <div className={clsx("my-8 p-8 text-center border border-dashed border-zinc-300 dark:border-zinc-700 rounded-lg text-zinc-500 text-sm", className)}>
             No data available
         </div>
     );
@@ -33,7 +33,7 @@ export default function Table<T extends Record<string, any>>({ data, columns, cl
     }));
 
     return (
-        <div className={clsx("w-full overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-800", className)}>
+        <div className={clsx("w-full my-8 overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-800", className)}>
             <div className="overflow-x-auto">
                 <table className="w-full text-sm text-left">
                     {/* header */}
