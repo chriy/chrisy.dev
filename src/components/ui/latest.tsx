@@ -105,7 +105,7 @@ const FilmCard = ({ post, index }: { post: Post, index: number }) => {
                             <FilmSprockets className="bottom-0 bg-zinc-900 dark:bg-black border-t border-zinc-200 dark:border-white/10"/>
                             <span className="absolute -right-4 bottom-4 text-9xl font-black text-black/5 dark:text-white/5 select-none rotate-30 scale-200 -translate-y-8">{index + 1}</span>
                             <div className="relative z-10 flex justify-between items-center">
-                                <span className="text-[10px] font-mono text-zinc-500 font-bold uppercase tracking-tight">POST_{ index.toString().padStart(2, '0') }</span>
+                                <span className="text-[10px] font-mono text-zinc-500 font-bold uppercase tracking-tight">POST_{ (index + 1).toString().padStart(2, '0') }</span>
                                 { post.metadata.tags?.length && (
                                     <Tag children={ post.metadata.tags.at(0) } variant={ 'info' } size={ "sm" }/>
                                 )}
