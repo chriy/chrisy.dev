@@ -2,10 +2,11 @@
     .shiki-renderer .shiki {
         background-color: transparent !important;
         margin: 0 !important;
-        padding: 1rem 1.25rem !important;
-        /* py-5 px-6 等效 */
-        font-size: 0.875rem !important;
+        margin-bottom: 0.6rem !important;
+        padding: 1.5rem 1.25rem !important;
+        font-size: 0.9rem !important;
         line-height: 1.6 !important;
+        font-family: inherit !important;
     }
 
     .shiki-renderer .shiki pre {
@@ -15,17 +16,11 @@
         overflow: visible !important;
     }
 
-    .shiki-renderer .shiki,
-    .shiki-renderer .shiki span,
-    .shiki-renderer .shiki code {
-        font-family: inherit !important;
-    }
-
-    /* 行号支持 */
     .shiki-renderer .shiki code {
         counter-reset: line;
         display: flex !important;
         flex-direction: column !important;
+        font-family: inherit !important;
     }
 
     .shiki-renderer .shiki .line {
@@ -41,10 +36,10 @@
         counter-increment: line;
         content: counter(line);
         display: inline-block !important;
-        width: 1.5rem !important;
+        width: 2rem;
         margin-right: 1.5rem !important;
         text-align: right !important;
-        color: rgb(113 113 122 / 0.4) !important;
+        color: rgba(113, 113, 122, 0.4) !important;
         user-select: none !important;
     }
 
