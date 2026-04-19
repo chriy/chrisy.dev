@@ -116,7 +116,7 @@ export const CodeBlock = ({ children }: { children: React.ReactNode }) => {
             </div>
 
             {/* Code Content */ }
-            <div className={ clsx("relative overflow-hidden", maple.className) }>
+            <div className={ clsx("relative overflow-hidden pr-6", maple.className) }>
                 <div className="overflow-x-auto no-scrollbar py-1">
                     { nodes ?? (
                         <pre className="m-0 px-6 py-5 text-sm leading-relaxed text-[#5c6370] opacity-50">

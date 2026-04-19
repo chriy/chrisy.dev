@@ -48,7 +48,7 @@ export const Callout = ({ title, type = 'info', children }: CalloutProps) => {
                         {title}
                     </div>
                 )}
-                <div className="text-sm opacity-90">
+                <div className="text-[14px] opacity-90">
                     {children}
                 </div>
             </div>
