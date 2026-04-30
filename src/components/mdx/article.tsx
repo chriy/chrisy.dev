@@ -4,7 +4,7 @@
 import { Clock, MapPin } from "lucide-react";
 import { Metadata } from "next";
 import BackTop from "@/components/ui/backtop";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { Tag } from "@/components/mdx/tag";
 import { Catalog } from "@/components/mdx/catalog";
@@ -28,14 +28,14 @@ export interface ArticleMeta extends Metadata {
 
 export const ArticleLayout = ({ children, meta }: { children: React.ReactNode, meta: ArticleMeta }) => {
     const [renderCatalog, setRenderCatalog] = useState<boolean>(false)
-    useEffect(() => {
-        // 等待 DOM 渲染完成后执行
-        const headers = document.querySelectorAll('.v-content h1, h2, h3, h4');
-        setRenderCatalog(headers.length > 0);
-    }, [children]); // 当 children 变化时重新检测 (或者依赖 meta.title/pathname)
+    // useEffect(() => {
+    //     // 等待 DOM 渲染完成后执行
+    //     const headers = document.querySelectorAll('.v-content h1, h2, h3, h4');
+    //     setRenderCatalog(headers.length > 0);
+    // }, [children]); // 当 children 变化时重新检测 (或者依赖 meta.title/pathname)
 
     return (
-        <article className={ clsx("w-full max-w-6xl mx-auto px-4 py-12 sm:py-16 font-sans antialiased text-zinc-800 dark:text-zinc-200", maple.className) }>
+        <article className={ clsx("w-full max-w-5xl mx-auto px-4 py-12 sm:py-16 font-sans antialiased text-zinc-800 dark:text-zinc-200", maple.className) }>
             <div className="v-title mb-10 text-center">
                 <h1 className={ clsx("text-3xl sm:text-4xl font-bold tracking-tight mb-4 text-zinc-700 dark:text-zinc-100 wrap-break-word") }>
                     { meta.title }
