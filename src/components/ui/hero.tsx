@@ -14,7 +14,7 @@ export default function Hero() {
                 <span className="text-[12px] font-bold uppercase tracking-[0.2em] text-gray-500">
                     <span className="inline-block sm:inline sm:w-full">BACKEND ENGINEER 后端工程师</span>
                     <span className="hidden sm:inline-block mx-2">/</span>
-                    <span className="inline-block sm:inline sm:w-full">PHOTOGRAPHY 摄影爱好</span>
+                    <span className="inline-block sm:inline sm:w-full">PHOTOGRAPHER 摄影爱好者</span>
                 </span>
             </div>
 
@@ -51,7 +51,7 @@ export default function Hero() {
             <div className="mt-20 grid grid-cols-1 lg:grid-cols-12 gap-16 w-full items-start">
                 <div className="lg:col-span-4 space-y-12">
                     <div className="space-y-6">
-                        <p className="text-xl text-zinc-500 font-normal leading-snug">
+                        <p className="text-2xl text-zinc-500 font-normal leading-snug">
                             你好，我是 <span className="dark:text-yellow-300 text-yellow-400 font-extrabold text-lg">Chrisy</span>
                         </p>
                         <p className="text-base text-zinc-500 leading-relaxed max-w-sm">
@@ -110,13 +110,13 @@ export default function Hero() {
                                 <div className="flex gap-4 whitespace-nowrap">
                                     <span className="w-5 text-zinc-700 shrink-0 text-right">04</span>
                                     <span className="text-zinc-400 pl-8">stack:</span>
-                                    <span className="text-emerald-400">["Java", "TypeScript", "Golang"]</span>
+                                    <span className="text-emerald-400">["Java", "TypeScript", "Node.js"]</span>
                                     <span className="text-zinc-500 -translate-x-4">,</span>
                                 </div>
                                 <div className="flex gap-4 whitespace-nowrap">
                                     <span className="w-5 text-zinc-700 shrink-0 text-right">05</span>
-                                    <span className="text-zinc-400 pl-8">camera:</span>
-                                    <span className="text-emerald-400">"SONY A7M4 G Master"</span>
+                                    <span className="text-zinc-400 pl-8">passion:</span>
+                                    <span className="text-emerald-400">"Photography (Sony α7M4)"</span>
                                 </div>
                                 <div className="flex gap-4">
                                     <span className="w-5 text-zinc-700 shrink-0 text-right">06</span>
