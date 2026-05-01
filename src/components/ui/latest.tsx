@@ -244,7 +244,7 @@ const FilmCard = ({ post, index }: { post: Post, index: number }) => {
                                     { post.metadata.title }
                                 </h3>
                                 <p className={clsx(
-                                    "line-clamp-3 h-[3.75rem] text-xs leading-5 text-zinc-500 transition-colors duration-500",
+                                    "line-clamp-3 h-15 text-xs leading-5 text-zinc-500 transition-colors duration-500",
                                     "group-hover:text-zinc-600 dark:text-zinc-500 dark:group-hover:text-zinc-400"
                                 )}>
                                     { post.metadata.summary }
