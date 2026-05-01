@@ -6,7 +6,7 @@
 @custom-variant dark (&:is(.dark *));
 
 .container-root {
-    @apply container mx-auto p-6 md:p-16 2xl:max-w-360;
+    @apply container mx-auto p-6 md:p-10 2xl:max-w-360;
 }
 
 :root {
