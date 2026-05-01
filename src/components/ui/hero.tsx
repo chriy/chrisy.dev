@@ -71,33 +71,36 @@ export default function Hero() {
                         </span>
                     </div>
 
-                    <div className="rounded-[2.5rem] p-1 lg:p-1.5 transition-all duration-700 hover:scale-[1.01]">
-                        <div className="bg-[#050505] border border-white/10 rounded-3xl p-10 font-mono text-sm overflow-hidden relative group overflow-x-auto">
+                    <div className="transition-transform duration-700 hover:-translate-y-1">
+                        <div className="relative overflow-hidden rounded-3xl border border-zinc-800/70 bg-zinc-950/95 font-mono text-sm text-zinc-400 group">
 
-                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                                <div className="h-50 w-75 rounded-full bg-blue-400 opacity-30 blur-[120px]"></div>
-                            </div>
+                            <div className="pointer-events-none absolute right-0 top-0 h-40 w-56 bg-blue-500/7 blur-3xl"></div>
+                            <div className="pointer-events-none absolute bottom-0 left-0 h-32 w-44 bg-emerald-500/3 blur-3xl"></div>
 
-                            <div className="absolute top-0 right-0 p-6 opacity-80 group-hover:opacity-100 transition-opacity">
-                                <div className="flex gap-2 items-center">
-                                    <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                                    <div className="w-3 h-3 rounded-full bg-amber-500"></div>
-                                    <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                                    <div className="px-2 text-zinc-600">profile.ts</div>
+                            <div className="relative z-10 flex items-center justify-between border-b border-white/[0.07] bg-white/2 px-5 py-4">
+                                <div className="flex items-center gap-2">
+                                    <div className="h-3 w-3 rounded-full bg-red-500"></div>
+                                    <div className="h-3 w-3 rounded-full bg-amber-500"></div>
+                                    <div className="h-3 w-3 rounded-full bg-emerald-500"></div>
+                                </div>
+                                <div className={ clsx("flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.22em] text-zinc-500", maple.className) }>
+                                    <span className="h-1.5 w-1.5 rounded-full bg-blue-500"></span>
+                                    profile.ts
                                 </div>
                             </div>
 
-                            <div className="space-y-4 mt-6">
+                            <div className="relative z-10 overflow-x-auto px-6 py-7 md:px-8">
+                                <div className="space-y-3.5">
                                 <div className="flex gap-4 whitespace-nowrap">
-                                    <span className="text-zinc-700 shrink-0 text-right">01</span>
+                                    <span className="w-5 shrink-0 text-right text-zinc-700">01</span>
                                     <span className="text-green-400">➜</span>
                                     <span className="text-blue-400">~</span>
-                                    <span className="text-zinc-700 italic">// Hello</span>
+                                    <span className="text-zinc-600 italic">// Hello</span>
                                 </div>
                                 <div className="flex gap-4">
                                     <span className="w-5 text-zinc-700 shrink-0 text-right">02</span>
-                                    <span className="text-blue-500">const</span>
-                                    <span className="text-white">Profile</span>
+                                    <span className="text-blue-500/90">const</span>
+                                    <span className="text-zinc-100">Profile</span>
                                     <span className="text-zinc-500">=</span>
                                     <span className="text-zinc-500">{'{'}</span>
                                 </div>
@@ -105,13 +108,13 @@ export default function Hero() {
                                     <span className="w-5 text-zinc-700 shrink-0 text-right">03</span>
                                     <span className="text-zinc-400 pl-8">role:</span>
                                     <span className="text-emerald-400">"Backend Engineer"</span>
-                                    <span className="text-zinc-500 -translate-x-4">,</span>
+                                    <span className="text-zinc-500">,</span>
                                 </div>
                                 <div className="flex gap-4 whitespace-nowrap">
                                     <span className="w-5 text-zinc-700 shrink-0 text-right">04</span>
                                     <span className="text-zinc-400 pl-8">stack:</span>
                                     <span className="text-emerald-400">["Java", "TypeScript", "Node.js"]</span>
-                                    <span className="text-zinc-500 -translate-x-4">,</span>
+                                    <span className="text-zinc-500">,</span>
                                 </div>
                                 <div className="flex gap-4 whitespace-nowrap">
                                     <span className="w-5 text-zinc-700 shrink-0 text-right">05</span>
@@ -124,15 +127,16 @@ export default function Hero() {
                                 </div>
                             </div>
 
-                            <div className="mt-6 pt-10 border-t border-white/5 flex items-center justify-between">
+                                <div className="mt-8 flex items-center justify-between border-t border-white/[0.07] pt-5">
                                 <div className="flex items-center gap-6">
-                                    <div className="text-[10px] font-bold text-zinc-600 uppercase tracking-widest flex items-center gap-2">
-                                        <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></div>
+                                    <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-zinc-500">
+                                        <div className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-500"></div>
                                         Online
                                     </div>
                                 </div>
-                                <div className="text-[10px] font-bold text-zinc-600 uppercase">
+                                    <div className="text-[10px] font-bold uppercase tracking-widest text-zinc-600">
                                     <span>UTF-8 | Spaces: 4</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
