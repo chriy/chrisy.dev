@@ -15,7 +15,7 @@ export default function Contact() {
         {
             name: 'GitHub',
             href: 'https://github.com/chriy',
-            detail: 'View my code & open source contributions',
+            detail: 'Building systems and contributing to open source.',
             className: "hover:border-zinc-200 hover:bg-zinc-50/50 dark:hover:border-zinc-800 dark:hover:bg-zinc-800/10",
             iconBg: "bg-neutral-100 text-neutral-900 dark:bg-neutral-900 dark:text-white",
             icon: <FaGithub size={32}/>
@@ -23,15 +23,15 @@ export default function Contact() {
         {
             name: 'Email',
             href: 'mailto:hi@chrisy.dev',
-            detail: 'Let’s build something together',
+            detail: 'Drop me a message. Let\'s chat over coffee.',
             className: "hover:border-amber-200 hover:bg-amber-50/50 dark:hover:border-amber-900 dark:hover:bg-amber-900/10",
             icon: <Mail size={32}/>,
             iconBg: "bg-amber-50 text-amber-600 dark:bg-amber-900/20 dark:text-amber-500"
         },
         {
-            name: "Location: UTC+08:00",
+            name: "Based in UTC+08:00",
             href: "#",
-            detail: "Available for on-site & remote opportunities",
+            detail: "Focused on logic, curious about the world.",
             className: "hover:border-purple-200 hover:bg-purple-50/50 dark:hover:border-purple-900 dark:hover:bg-purple-900/10",
             iconBg: "bg-purple-50 text-purple-600 dark:bg-purple-900/20 dark:text-purple-400",
             icon: <MapPin size={32}/>
@@ -52,14 +52,14 @@ export default function Contact() {
                     <h2 className={clsx('text-4xl md:text-4xl font-bold tracking-tight font-mono dark:text-white text-zinc-900', maple.className)}>
                         <span className="text-green-500">#</span>
                         <span className="text-teal-500 px-6">cat</span>
-                        <span className={clsx("text-4xl align-middle block sm:inline")}>~/conf/me.dat</span>
+                        <span className={ clsx("text-4xl align-middle block sm:inline") }>~/about</span>
                         <span className="text-blue-500 animate-pulse">_</span>
                     </h2>
                     <p className={clsx('italic mt-8 text-md max-w-sm dark:text-zinc-500 text-zinc-400', maple.className)}>
-                        Hello. Nice to meet you.
+                        Logic in code, magic in lenses.
                     </p>
                     <p className={clsx(' mt-8 text-md max-w-sm dark:text-zinc-500 text-zinc-400', maple.className)}>
-                        很高兴认识你，欢迎随时联系。
+                        捕捉逻辑的严谨，记录光影的瞬间。欢迎随时交流。
                     </p>
                 </div>
                 <div className="flex-1 flex flex-col justify-between py-16">
