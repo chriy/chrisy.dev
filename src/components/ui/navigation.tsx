@@ -9,7 +9,8 @@ import { maple } from "@/lib/font";
 
 const menu = [
     { path: '/', label: '~/' },
-    { path: '/posts', label: '~/posts' }
+    { path: '/posts', label: '~/posts' },
+    { path: '/about', label: '~/about' },
 ]
 
 export default function Navigation() {
