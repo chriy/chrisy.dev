@@ -209,11 +209,11 @@ const FilmCard = ({ post, index }: { post: Post, index: number }) => {
                     </div>
                     <Link href={ post.slug } className="block cursor-pointer">
                         <div className={ clsx(
-                            "relative flex flex-col justify-between min-w-64 min-h-80 px-6 py-10 overflow-hidden",
-                            "bg-white/80 dark:bg-transparent shadow-2xl shadow-zinc-200/60 dark:shadow-none border border-zinc-100/50 dark:border-transparent rounded-xs"
+                            "relative flex h-80 min-w-64 flex-col justify-between overflow-hidden px-6 py-10 transition-colors duration-500",
+                            "bg-zinc-50 dark:bg-transparent shadow-2xl shadow-zinc-200/70 dark:shadow-none border border-zinc-200/80 group-hover:border-indigo-300/70 dark:border-transparent dark:group-hover:border-indigo-400/30 rounded-xs"
                         ) }>
-                            <FilmSprockets className="top-0 bg-zinc-700 dark:bg-black border-b border-zinc-200 dark:border-white/10"/>
-                            <FilmSprockets className="bottom-0 bg-zinc-700 dark:bg-black border-t border-zinc-200 dark:border-white/10"/>
+                            <FilmSprockets className="top-0 bg-zinc-200/90 dark:bg-black border-b border-zinc-300/80 dark:border-white/10"/>
+                            <FilmSprockets className="bottom-0 bg-zinc-200/90 dark:bg-black border-t border-zinc-300/80 dark:border-white/10"/>
                             <span className="absolute -right-4 bottom-4 text-9xl font-black text-black/5 dark:text-white/5 select-none rotate-30 scale-200 -translate-y-8">{index + 1}</span>
                             <div className="relative z-10 flex justify-between items-center">
                                 <span className="text-[10px] font-mono text-zinc-500 font-bold uppercase tracking-tight">POST_{ (index + 1).toString().padStart(2, '0') }</span>
@@ -222,25 +222,38 @@ const FilmCard = ({ post, index }: { post: Post, index: number }) => {
                                 )}
                             </div>
                             <div className="relative z-10 mt-auto mb-8 space-y-2">
-                                <div className="w-8 h-px bg-indigo-400 group-hover:w-full transition-all duration-800"></div>
+                                <div className="flex items-center justify-between">
+                                    <div className="flex items-center gap-1">
+                                        { Array.from({ length: 4 }).map((_, markIndex) => (
+                                            <span
+                                                key={ markIndex }
+                                                className="h-1 w-3 rounded-full bg-zinc-300 transition-colors duration-500 group-hover:bg-indigo-300 dark:bg-zinc-700 dark:group-hover:bg-indigo-500/70"
+                                            ></span>
+                                        )) }
+                                    </div>
+                                    <span className="text-[9px] font-mono font-bold uppercase tracking-[0.2em] text-zinc-400 transition-colors duration-500 group-hover:text-indigo-500 dark:text-zinc-600 dark:group-hover:text-indigo-300">
+                                        Read
+                                    </span>
+                                </div>
                                 <h3 className={clsx(
-                                    "text-3xl font-bold italic leading-tight transition-all duration-700 my-4",
+                                    "my-4 line-clamp-1 text-3xl font-bold italic leading-tight transition-all duration-700",
                                     "text-zinc-600 group-hover:text-zinc-950",
                                     "dark:text-zinc-400 dark:group-hover:text-white",
                                     nunito.className
                                 )}>
                                     { post.metadata.title }
                                 </h3>
-                                <p className={clsx("text-xs text-zinc-500 opacity-0 transition-opacity duration-500", "group-hover:opacity-100")}>
+                                <p className={clsx(
+                                    "line-clamp-3 h-[3.75rem] text-xs leading-5 text-zinc-500 transition-colors duration-500",
+                                    "group-hover:text-zinc-600 dark:text-zinc-500 dark:group-hover:text-zinc-400"
+                                )}>
                                     { post.metadata.summary }
                                 </p>
                             </div>
                             <div className="relative z-10 border-t border-dashed border-zinc-400/30 pt-4 flex justify-between items-center">
                                 <span className="text-[10px] font-mono text-zinc-400 group-hover:text-zinc-600">{ post.metadata.date }</span>
-                                <ArrowUpRight size={ 14 } className="text-zinc-400 group-hover:text-indigo-400"/>
+                                <ArrowUpRight size={ 14 } className="text-zinc-400 transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-indigo-400"/>
                             </div>
-                            <div className="absolute inset-0 border-2 border-transparent group-hover:border-indigo-400/10 pointer-events-none"></div>
-
                         </div>
                     </Link>
                 </motion.div>
@@ -256,7 +269,7 @@ const FilmSprockets = ({ className = "" }: { className?: string }) => {
                 <div
                     key={i}
                     className={clsx("w-3 h-4 rounded-xs transition-all duration-500",
-                        "bg-zinc-400/90 border border-zinc-700/35 shadow-[inset_0_1.5px_3px_rgba(0,0,0,0.24)]",
+                        "bg-zinc-500/65 border border-zinc-600/25 shadow-[inset_0_1.5px_3px_rgba(39,39,42,0.22)]",
                         "dark:bg-zinc-800/90 dark:border-zinc-700/70 dark:shadow-none",
                     )}></div>
             ))}
