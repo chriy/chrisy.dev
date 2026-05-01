@@ -101,7 +101,7 @@ export default function Posts({ posts }: { posts: Post[] }) {
     const visiblePosts = useMemo(() => filteredPosts.slice(0, displayLimit), [filteredPosts, displayLimit]);
 
     return (
-        <section className="w-full max-w-6xl mx-auto px-6 md:px-12 py-16 min-h-screen selection:bg-blue-500/20 relative">
+        <section className="w-full max-w-7xl mx-auto px-6 md:px-12 py-16 min-h-screen selection:bg-blue-500/20 relative">
             {/* Vertical Decoration - Matching Home Style */}
             <div className="absolute left-4 top-40 hidden xl:block">
                 <span className="[writing-mode:vertical-lr] text-[10px] font-bold uppercase tracking-[1em] text-zinc-300 dark:text-zinc-800 select-none opacity-50">
@@ -117,7 +117,7 @@ export default function Posts({ posts }: { posts: Post[] }) {
                     <div className="flex items-center gap-4 translate-x-1 opacity-60">
                         <span className="h-px w-10 bg-zinc-600"></span>
                         <span className={ clsx("text-[12px] font-bold uppercase tracking-[0.3em] text-zinc-500", maple.className) }>
-                            Archives / <span className="text-blue-500">Thoughts</span> / Structure
+                            Archives / <span className="text-blue-500">Notes</span>
                         </span>
                     </div>
 
@@ -132,7 +132,7 @@ export default function Posts({ posts }: { posts: Post[] }) {
                 {/* Left: Main Post Timeline */}
                 <div className="lg:col-span-8 relative">
                     {/* Decorative Timeline Line */}
-                    <div className="absolute left-8.5 top-0 bottom-0 hidden md:block">
+                    <div className="absolute left-8 top-0 bottom-0 hidden md:block">
                         <div className="absolute left-0 top-0 bottom-0 w-px bg-linear-to-b from-transparent via-zinc-200 dark:via-zinc-800/60 to-transparent" />
                     </div>
 
@@ -156,7 +156,7 @@ export default function Posts({ posts }: { posts: Post[] }) {
                         <div className="py-40 text-center ml-20">
                             <Terminal size={32} className="mx-auto mb-6 text-zinc-100 dark:text-zinc-900" />
                             <p className={clsx("text-[10px] text-zinc-400 font-mono tracking-[0.3em] uppercase", maple.className)}>
-                                Grep_Fail: No nodes found for "{searchQuery}"
+                                No matching notes found for "{searchQuery}"
                             </p>
                         </div>
                     )}
@@ -205,7 +205,7 @@ const SearchHeader = ({
                 <div className={clsx('flex flex-wrap items-center gap-x-5 gap-y-4 text-xl md:text-3xl font-bold tracking-tight', maple.className)}>
                     {/* Static Command Part */}
                     <div className="flex items-center shrink-0">
-                        <span className="text-green-500 font-black mr-4">{ '>' }</span>
+                        <span className="text-green-500 font-black mr-4">{ '#' }</span>
                         <span className="text-blue-500 italic mr-4">ls</span>
                         <span className="text-zinc-400 dark:text-zinc-500">-l</span>
                         <span className="text-zinc-900 dark:text-white ml-4">～/posts</span>
@@ -294,7 +294,7 @@ const PostItem = ({ post, index }: { post: Post; index: number }) => {
             className="group relative md:pl-20"
         >
             {/* Commit Node */}
-            <div className="absolute left-8 top-1/2 -translate-y-1/2 hidden md:flex items-center justify-center z-10">
+            <div className="absolute left-8 top-1/2 -translate-x-1/2 -translate-y-1/2 hidden md:flex items-center justify-center z-10">
                 <div className="relative">
                     <div className="absolute inset-0 bg-blue-400/10 rounded-full scale-[2] animate-pulse" />
                     <div className="absolute inset-0 bg-blue-400/20 rounded-full scale-[2.5] opacity-0 group-hover:opacity-100 group-hover:animate-ping transition-all duration-500" />
