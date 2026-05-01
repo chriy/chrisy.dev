@@ -1,15 +1,64 @@
 'use client'
 
-import React, { useRef } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { ArrowUpRight, Paperclip, Terminal } from 'lucide-react';
+import { ArrowUpRight, ChevronLeft, ChevronRight, Paperclip, Terminal } from 'lucide-react';
 import { clsx } from "clsx";
 import { maple, nunito } from "@/lib/font";
 import { Tag } from "@/components/mdx/tag";
 import { Post } from "@/lib/posts";
 
-export default function LatestPost({ posts }: {posts: Post[]}) {
+export default function LatestPost({ posts }: { posts: Post[] }) {
+    const trackRef = useRef<HTMLDivElement>(null);
+    const [canScrollPrev, setCanScrollPrev] = useState(false);
+    const [canScrollNext, setCanScrollNext] = useState(false);
+
+    const updateScrollState = useCallback(() => {
+        const track = trackRef.current;
+
+        if (!track) {
+            return;
+        }
+
+        const maxScrollLeft = track.scrollWidth - track.clientWidth;
+        setCanScrollPrev(track.scrollLeft > 4);
+        setCanScrollNext(track.scrollLeft < maxScrollLeft - 4);
+    }, []);
+
+    useEffect(() => {
+        updateScrollState();
+
+        const track = trackRef.current;
+
+        if (!track) {
+            return;
+        }
+
+        const resizeObserver = new ResizeObserver(updateScrollState);
+        resizeObserver.observe(track);
+        window.addEventListener('resize', updateScrollState);
+
+        return () => {
+            resizeObserver.disconnect();
+            window.removeEventListener('resize', updateScrollState);
+        };
+    }, [posts.length, updateScrollState]);
+
+    const scrollFilm = (direction: 'prev' | 'next') => {
+        const track = trackRef.current;
+
+        if (!track) {
+            return;
+        }
+
+        const scrollDistance = Math.min(track.clientWidth * 0.75, 420);
+        track.scrollBy({
+            left: direction === 'next' ? scrollDistance : -scrollDistance,
+            behavior: 'smooth',
+        });
+    };
+
     return (
         <section className="overflow-hidden bg-theme-light dark:bg-theme-dark transition-colors duration-500">
             <div className="container-root">
@@ -32,8 +81,8 @@ export default function LatestPost({ posts }: {posts: Post[]}) {
                                 "text-zinc-900 dark:text-zinc-100",
                                 maple.className
                             ) }>
-                                <span className="text-indigo-500/40 mr-3 select-none">❯</span>
-                                <span className="text-indigo-500">tail</span>
+                                <span className="text-cyan-300 mr-3 select-none">#</span>
+                                <span className="text-indigo-500">head</span>
                                 <span className="text-zinc-400 dark:text-zinc-600 mx-3">-n</span>
                                 <span className="text-emerald-500 dark:text-emerald-400">5</span>
                                 <span className="ml-4 text-zinc-800 dark:text-zinc-200">~/posts</span>
@@ -55,16 +104,78 @@ export default function LatestPost({ posts }: {posts: Post[]}) {
 
                 <div className={ "pt-20" }>
                     <div className="relative line w-full h-px bg-zinc-200 dark:bg-zinc-800"></div>
-                    <div className={ clsx('w-full flex flex-row items-start justify-start gap-8 md:gap-12', 'overflow-x-auto no-scrollbar px-1', '-mt-16 pt-28') }>
-                        {posts.map((post, i) => (
-                            <FilmCard key={ i } post={ post } index={ i }/>
-                        ))}
+                    <div className="relative">
+                        <div
+                            aria-hidden="true"
+                            className={ clsx(
+                                "pointer-events-none absolute left-0 top-0 z-20 h-full w-12 bg-linear-to-r from-theme-light to-transparent transition-opacity dark:from-theme-dark",
+                                canScrollPrev ? "opacity-100" : "opacity-0"
+                            ) }
+                        />
+                        <div
+                            aria-hidden="true"
+                            className={ clsx(
+                                "pointer-events-none absolute right-0 top-0 z-20 h-full w-12 bg-linear-to-l from-theme-light to-transparent transition-opacity dark:from-theme-dark",
+                                canScrollNext ? "opacity-100" : "opacity-0"
+                            ) }
+                        />
+                        <div
+                            ref={ trackRef }
+                            onScroll={ updateScrollState }
+                            className={ clsx(
+                                'w-full flex flex-row items-start justify-start gap-8 md:gap-12',
+                                'overflow-x-auto no-scrollbar scroll-smooth px-1',
+                                '-mt-16 pt-28 pb-8'
+                            ) }
+                        >
+                            { posts.map((post, i) => (
+                                <FilmCard key={ i } post={ post } index={ i }/>
+                            )) }
+                        </div>
+                    </div>
+                    <div className="mt-2 flex items-center justify-center gap-3">
+                        <FilmScrollButton
+                            direction="prev"
+                            disabled={ !canScrollPrev }
+                            onClick={ () => scrollFilm('prev') }
+                        />
+                        <FilmScrollButton
+                            direction="next"
+                            disabled={ !canScrollNext }
+                            onClick={ () => scrollFilm('next') }
+                        />
                     </div>
                 </div>
             </div>
         </section>
     )
 }
+
+const FilmScrollButton = ({ direction, disabled, onClick, }: {
+    direction: 'prev' | 'next';
+    disabled: boolean;
+    onClick: () => void;
+}) => {
+    const Icon = direction === 'prev' ? ChevronLeft : ChevronRight;
+    return (
+        <button
+            type="button"
+            onClick={ onClick }
+            disabled={ disabled }
+            aria-label={ direction === 'prev' ? 'Scroll latest posts left' : 'Scroll latest posts right' }
+            className={ clsx(
+                "flex h-10 w-10 items-center justify-center rounded-full border transition-all duration-300",
+                "border-zinc-200/80 bg-white/55 text-zinc-600 shadow-lg shadow-zinc-200/50 backdrop-blur-md",
+                "hover:-translate-y-0.5 hover:border-indigo-300 hover:text-indigo-500",
+                "focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-theme-light",
+                "dark:border-white/10 dark:bg-zinc-950/35 dark:text-zinc-300 dark:shadow-none dark:hover:border-indigo-400/60 dark:hover:bg-zinc-950/50 dark:hover:text-indigo-300 dark:focus-visible:ring-offset-theme-dark",
+                disabled && "pointer-events-none translate-y-0 opacity-35"
+            ) }
+        >
+            <Icon size={ 18 } strokeWidth={ 2.2 }/>
+        </button>
+    );
+};
 
 
 const FilmCard = ({ post, index }: { post: Post, index: number }) => {
@@ -92,7 +203,7 @@ const FilmCard = ({ post, index }: { post: Post, index: number }) => {
                 >
                     <div className="absolute -top-20 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center">
                         <div className="w-8 h-8 bg-zinc-200 dark:bg-zinc-800 rounded flex items-center justify-center shadow-md group-hover:bg-indigo-400 dark:group-hover:bg-indigo-400 transition-colors duration-300">
-                            <Paperclip size={16} className="text-zinc-500 dark:text-zinc-400 group-hover:text-white dark:group-hover:text-white"/>
+                            <Paperclip size={ 16 } className="text-zinc-500 dark:text-zinc-400 group-hover:text-white dark:group-hover:text-white"/>
                         </div>
                         <div className="w-px h-12 bg-zinc-300 dark:bg-zinc-700"></div>
                     </div>
@@ -101,8 +212,8 @@ const FilmCard = ({ post, index }: { post: Post, index: number }) => {
                             "relative flex flex-col justify-between min-w-64 min-h-80 px-6 py-10 overflow-hidden",
                             "bg-white/80 dark:bg-transparent shadow-2xl shadow-zinc-200/60 dark:shadow-none border border-zinc-100/50 dark:border-transparent rounded-xs"
                         ) }>
-                            <FilmSprockets className="top-0 bg-zinc-900 dark:bg-black border-b border-zinc-200 dark:border-white/10"/>
-                            <FilmSprockets className="bottom-0 bg-zinc-900 dark:bg-black border-t border-zinc-200 dark:border-white/10"/>
+                            <FilmSprockets className="top-0 bg-zinc-700 dark:bg-black border-b border-zinc-200 dark:border-white/10"/>
+                            <FilmSprockets className="bottom-0 bg-zinc-700 dark:bg-black border-t border-zinc-200 dark:border-white/10"/>
                             <span className="absolute -right-4 bottom-4 text-9xl font-black text-black/5 dark:text-white/5 select-none rotate-30 scale-200 -translate-y-8">{index + 1}</span>
                             <div className="relative z-10 flex justify-between items-center">
                                 <span className="text-[10px] font-mono text-zinc-500 font-bold uppercase tracking-tight">POST_{ (index + 1).toString().padStart(2, '0') }</span>
@@ -126,7 +237,7 @@ const FilmCard = ({ post, index }: { post: Post, index: number }) => {
                             </div>
                             <div className="relative z-10 border-t border-dashed border-zinc-400/30 pt-4 flex justify-between items-center">
                                 <span className="text-[10px] font-mono text-zinc-400 group-hover:text-zinc-600">{ post.metadata.date }</span>
-                                <ArrowUpRight size={14} className="text-zinc-400 group-hover:text-indigo-400"/>
+                                <ArrowUpRight size={ 14 } className="text-zinc-400 group-hover:text-indigo-400"/>
                             </div>
                             <div className="absolute inset-0 border-2 border-transparent group-hover:border-indigo-400/10 pointer-events-none"></div>
 
@@ -138,15 +249,15 @@ const FilmCard = ({ post, index }: { post: Post, index: number }) => {
     )
 }
 
-const FilmSprockets = ({ className = "" }: {className?: string}) => {
+const FilmSprockets = ({ className = "" }: { className?: string }) => {
     return (
         <div className={`absolute left-0 w-full h-8 flex justify-between items-center px-3 z-20 ${className}`}>
             {Array.from({ length: 7 }).map((_, i) => (
                 <div
                     key={i}
                     className={clsx("w-3 h-4 rounded-xs transition-all duration-500",
-                        "bg-zinc-100 border border-zinc-400/20 shadow-[inset_0_1.5px_3px_rgba(0,0,0,0.2)]",
-                        "dark:bg-zinc-800 dark:border-zinc-700 dark:shadow-none",
+                        "bg-zinc-400/90 border border-zinc-700/35 shadow-[inset_0_1.5px_3px_rgba(0,0,0,0.24)]",
+                        "dark:bg-zinc-800/90 dark:border-zinc-700/70 dark:shadow-none",
                     )}></div>
             ))}
         </div>
