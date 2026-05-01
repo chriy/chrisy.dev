@@ -65,7 +65,7 @@ export default function LatestPost({ posts }: { posts: Post[] }) {
                 <div className="mb-12">
                     <div className="flex items-center justify-between">
                         <div className="flex items-center gap-6">
-                            <div className="flex items-center gap-2 px-3 py-1">
+                            <div className="flex items-center gap-2 py-8 md:py-0">
                                 <Terminal className="text-indigo-500" size={ 12 }/>
                                 <span className="text-[12px] font-mono tracking-wider text-zinc-500 dark:text-zinc-400 lowercase">
                                     ~/chrisy/blog/archive
@@ -96,7 +96,7 @@ export default function LatestPost({ posts }: { posts: Post[] }) {
                                 />
                             </h2>
                         </div>
-                        <div className="translate-y-2">
+                        <div className="hidden translate-y-2 md:block">
                             <Bot/>
                         </div>
                     </div>
