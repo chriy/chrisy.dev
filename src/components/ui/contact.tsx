@@ -49,10 +49,10 @@ export default function Contact() {
                         ping chrisy.dev
                     </span>
                     </div>
-                    <h2 className={clsx('text-4xl md:text-4xl font-bold tracking-tight font-mono dark:text-white text-zinc-900', maple.className)}>
+                    <h2 className={clsx('flex items-center gap-4 whitespace-nowrap text-4xl md:text-4xl font-bold tracking-tight font-mono dark:text-white text-zinc-900', maple.className)}>
                         <span className="text-green-500">#</span>
-                        <span className="text-teal-500 px-6">cat</span>
-                        <span className={ clsx("text-4xl align-middle block sm:inline") }>~/about</span>
+                        <span className="text-teal-500">cat</span>
+                        <span className="text-4xl align-middle">~/about</span>
                         <span className="text-blue-500 animate-pulse">_</span>
                     </h2>
                     <p className={clsx('italic mt-8 text-md max-w-sm dark:text-zinc-500 text-zinc-400', maple.className)}>
