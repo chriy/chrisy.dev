@@ -7,7 +7,7 @@ export default function Footer() {
                     <p className="text-neutral-700 dark:text-neutral-400 font-bold font-stretch-100%">Chrisy</p>
                     <div className="border-s border-neutral-700 ps-5 ms-5">
                         <p className="text-sm text-neutral-700 dark:text-neutral-400">
-                            &copy; {year} Chris Yang. Build with passion and lots of coffee.
+                            &copy; { year } Chris Yang. Built with passion and lots of coffee.
                         </p>
                     </div>
                 </div>
