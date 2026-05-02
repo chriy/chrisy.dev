@@ -19,18 +19,27 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
     metadataBase: new URL('https://chrisy.dev'),
     title: {
-        default: 'Chrisy | Backend Engineer & Photography',
+        default: 'Chrisy - Software Engineer',
         template: '%s | Chrisy'
     },
-    description: "Hi, I'm Chrisy, a software engineer who loves capturing moments through photography.",
-    keywords: ['Chrisy', 'Software Engineer', 'Backend Developer', 'Photography'],
+    description: "Hi, I'm Chrisy, a software engineer who loves building things.",
+    keywords: [
+        'Chrisy',
+        'Software Engineer',
+        'Backend Developer',
+        'Photography'
+    ],
     authors: [{ name: 'Chrisy', url: 'https://chrisy.dev' }],
     creator: 'Chrisy',
     publisher: 'Chrisy',
+
+    alternates: {
+        canonical: '/',
+    },
+
     icons: {
         icon: '/favicon.ico',
-        shortcut: '/favicon.ico',
-        apple: '/favicon.ico',
+        shortcut: '/favicon.ico'
     },
     robots: {
         index: true,
@@ -48,17 +57,22 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
         <html lang="en" className='no-scrollbar' suppressHydrationWarning>
-            <body className={clsx("bg-theme-light dark:bg-theme-dark transition-colors duration-300 ", nunito.className, noto.className, maple.className)}>
-                <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-                    <div className="flex flex-col min-h-svh">
-                        <Header />
-                        <main className="flex flex-col grow">
-                            {children}
-                        </main>
-                        <Footer />
-                    </div>
-                </ThemeProvider>
-            </body>
+        <body className={ clsx(
+            "bg-theme-light dark:bg-theme-dark transition-colors duration-300",
+            nunito.variable,
+            noto.variable,
+            maple.variable
+        ) }>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+            <div className="flex flex-col min-h-svh">
+                <Header/>
+                <main className="flex flex-col grow">
+                    { children }
+                </main>
+                <Footer/>
+            </div>
+        </ThemeProvider>
+        </body>
         </html>
     )
 }
