@@ -8,12 +8,22 @@ export default function SplashScreen() {
     const [isFading, setIsFading] = useState(false);
 
     useEffect(() => {
+        let isMounted = true;
+        const hideSplash = () => {
+            if (!isMounted) return;
+            setIsFading(true);
+            setTimeout(() => setShow(false), 500);
+        };
         document.fonts.ready.then(() => {
-            setTimeout(() => {
-                setIsFading(true);
-                setTimeout(() => setShow(false), 500);
-            }, 300);
+            setTimeout(hideSplash, 600);
         });
+
+        const fallbackTimeout = setTimeout(hideSplash, 5000);
+
+        return () => {
+            isMounted = false;
+            clearTimeout(fallbackTimeout);
+        };
     }, []);
 
     if (!show) return null;
@@ -21,7 +31,7 @@ export default function SplashScreen() {
     return (
         <div
             className={ clsx(
-                "fixed inset-0 z-100 flex flex-col items-center justify-center bg-theme-light dark:bg-[#09090b] transition-opacity duration-500 ease-in-out",
+                "fixed inset-0 z-100 flex flex-col items-center justify-center bg-slate-50 dark:bg-[#09090b] transition-opacity duration-500 ease-in-out",
                 isFading ? "opacity-0 pointer-events-none" : "opacity-100"
             ) }
         >
