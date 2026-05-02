@@ -24,10 +24,8 @@ export const metadata: Metadata = {
     },
     description: "Hi, I'm Chrisy, a software engineer who loves building things.",
     keywords: [
-        'Chrisy',
-        'Software Engineer',
-        'Backend Developer',
-        'Photography'
+        'Chrisy', 'Software Engineer', 'Backend Developer', 'Photography',
+        'Java', 'TypeScript', 'React', 'Next.js', 'Node.js'
     ],
     authors: [{ name: 'Chrisy', url: 'https://chrisy.dev' }],
     creator: 'Chrisy',
@@ -58,10 +56,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     return (
         <html lang="en" className='no-scrollbar' suppressHydrationWarning>
         <body className={ clsx(
-            "bg-theme-light dark:bg-theme-dark transition-colors duration-300",
-            nunito.variable,
-            noto.variable,
-            maple.variable
+            "bg-theme-light dark:bg-theme-dark transition-colors duration-300", nunito.className, noto.className, maple.className
         ) }>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
             <div className="flex flex-col min-h-svh">

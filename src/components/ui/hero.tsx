@@ -12,7 +12,7 @@ export default function Hero() {
             <div className="flex items-center gap-4 mb-10 translate-x-1">
                 <span className="h-px w-12 bg-zinc-600"></span>
                 <span className="text-[12px] font-bold uppercase tracking-[0.2em] text-gray-500">
-                    <span className="inline-block sm:inline sm:w-full">BACKEND ENGINEER 后端工程师</span>
+                    <span className="inline-block sm:inline sm:w-full">SOFTWARE ENGINEER 软件工程师</span>
                     <span className="hidden sm:inline-block mx-2">/</span>
                     <span className="inline-block sm:inline sm:w-full">PHOTOGRAPHER 摄影爱好者</span>
                 </span>
@@ -49,13 +49,13 @@ export default function Hero() {
             </h1>
 
             <div className="mt-20 grid grid-cols-1 lg:grid-cols-12 gap-16 w-full items-start">
-                <div className="lg:col-span-4 space-y-12">
+                <div className="lg:col-span-5 space-y-12">
                     <div className="space-y-6">
                         <p className="text-2xl text-zinc-500 font-normal leading-snug">
                             你好，我是 <span className="dark:text-yellow-300 text-yellow-400 font-extrabold text-lg">Chrisy</span>
                         </p>
-                        <p className="text-base text-zinc-500 leading-relaxed max-w-sm">
-                            一名后端工程师 <LineDivider/> 工作时敲键盘，闲暇时按快门 ：)
+                        <p className="text-base text-zinc-500 leading-relaxed max-w-md">
+                            一名软件工程师 <LineDivider/> 工作时敲键盘，闲暇时按快门 ：)
                             <span className="block mt-4 text-zinc-700 italic">
                                 Solving problems with code, exploring the world through the lens.
                             </span>
@@ -64,7 +64,7 @@ export default function Hero() {
 
                 </div>
 
-                <div className="lg:col-span-8 relative">
+                <div className="lg:col-span-7 relative">
                     <div className="absolute -left-12 top-0 hidden lg:block">
                         <span className="[writing-mode:vertical-lr] text-[9px] font-bold uppercase tracking-[1em] text-zinc-800 select-none">
                           PERSPECTIVE & PRECISION
@@ -107,7 +107,7 @@ export default function Hero() {
                                 <div className="flex gap-4 whitespace-nowrap">
                                     <span className="w-5 text-zinc-700 shrink-0 text-right">03</span>
                                     <span className="text-zinc-400 pl-8">role:</span>
-                                    <span className="text-emerald-400">"Backend Engineer"</span>
+                                    <span className="text-emerald-400">"Software Engineer"</span>
                                     <span className="text-zinc-500">,</span>
                                 </div>
                                 <div className="flex gap-4 whitespace-nowrap">
