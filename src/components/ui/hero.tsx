@@ -11,7 +11,7 @@ export default function Hero() {
         <section className={"container-root pt-12 sm:pt-16 md:pt-20 lg:pt-24"}>
             <div className="flex items-center gap-4 mb-10 translate-x-1">
                 <span className="h-px w-12 bg-zinc-600"></span>
-                <span className="text-[12px] font-bold uppercase tracking-[0.2em] text-gray-500">
+                <span className="text-[12px] font-bold uppercase tracking-[0.2em] text-gray-400">
                     <span className="inline-block sm:inline sm:w-full">SOFTWARE ENGINEER 软件工程师</span>
                     <span className="hidden sm:inline-block mx-2">/</span>
                     <span className="inline-block sm:inline sm:w-full">PHOTOGRAPHER 摄影爱好者</span>

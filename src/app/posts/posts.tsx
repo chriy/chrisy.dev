@@ -101,10 +101,10 @@ export default function Posts({ posts }: { posts: Post[] }) {
     const visiblePosts = useMemo(() => filteredPosts.slice(0, displayLimit), [filteredPosts, displayLimit]);
 
     return (
-        <section className="w-full max-w-7xl mx-auto px-6 md:px-12 py-16 min-h-screen selection:bg-blue-500/20 relative">
+        <section className="container-root mx-auto px-6 md:px-12 py-16 min-h-screen selection:bg-blue-500/20 relative">
             {/* Vertical Decoration - Matching Home Style */}
             <div className="absolute left-4 top-40 hidden xl:block">
-                <span className="[writing-mode:vertical-lr] text-[10px] font-bold uppercase tracking-[1em] text-zinc-300 dark:text-zinc-800 select-none opacity-50">
+                <span className="[writing-mode:vertical-lr] text-[10px] font-bold uppercase tracking-[1em] text-zinc-400 select-none opacity-50">
                     PERSPECTIVE & PRECISION
                 </span>
             </div>
@@ -116,7 +116,7 @@ export default function Posts({ posts }: { posts: Post[] }) {
                     {/* Top Meta Bar */}
                     <div className="flex items-center gap-4 translate-x-1 opacity-60">
                         <span className="h-px w-10 bg-zinc-600"></span>
-                        <span className={ clsx("text-[12px] font-bold uppercase tracking-[0.3em] text-zinc-500", maple.className) }>
+                        <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">
                             Archives / <span className="text-blue-500">Notes</span>
                         </span>
                     </div>

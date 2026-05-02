@@ -16,7 +16,7 @@ export default function About() {
         <section className="container-root min-h-screen py-16 md:py-24">
             <div className="flex items-center gap-4 mb-12 translate-x-1">
                 <span className="h-px w-12 bg-zinc-600"></span>
-                <span className={ clsx("text-[12px] font-bold uppercase tracking-[0.3em] text-zinc-500", maple.className) }>
+                <span className={ clsx("text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-400", maple.className) }>
                     Site / Profile
                 </span>
             </div>
