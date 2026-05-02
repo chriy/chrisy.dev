@@ -212,9 +212,9 @@ const FilmCard = ({ post, index }: { post: Post, index: number }) => {
                             "relative flex h-80 min-w-64 flex-col justify-between overflow-hidden px-6 py-10 transition-colors duration-500",
                             "bg-zinc-50 dark:bg-transparent shadow-2xl shadow-zinc-200/70 dark:shadow-none border border-zinc-200/80 group-hover:border-indigo-300/70 dark:border-transparent dark:group-hover:border-indigo-400/30 rounded-xs"
                         ) }>
-                            <FilmSprockets className="top-0 bg-zinc-200/90 dark:bg-black border-b border-zinc-300/80 dark:border-white/10"/>
-                            <FilmSprockets className="bottom-0 bg-zinc-200/90 dark:bg-black border-t border-zinc-300/80 dark:border-white/10"/>
-                            <span className="absolute -right-4 bottom-4 text-9xl font-black text-black/5 dark:text-white/5 select-none rotate-30 scale-200 -translate-y-8">{index + 1}</span>
+                            <FilmSprockets className="top-0 bg-zinc-50/90 backdrop-blur-md dark:bg-black border-b border-zinc-200/60 dark:border-white/10"/>
+                            <FilmSprockets className="bottom-0 bg-zinc-50/90 backdrop-blur-md dark:bg-black border-t border-zinc-200/60 dark:border-white/10"/>
+                            <span className="absolute -right-4 bottom-4 text-9xl font-black text-black/5 dark:text-white/5 select-none rotate-30 scale-200 -translate-y-8">{ index + 1 }</span>
                             <div className="relative z-10 flex justify-between items-center">
                                 <span className="text-[10px] font-mono text-zinc-500 font-bold uppercase tracking-tight">POST_{ (index + 1).toString().padStart(2, '0') }</span>
                                 { post.metadata.tags?.length && (
