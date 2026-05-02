@@ -51,7 +51,7 @@ export default function Hero() {
             <div className="mt-20 grid grid-cols-1 lg:grid-cols-12 gap-16 w-full items-start">
                 <div className="lg:col-span-5 space-y-12">
                     <div className="space-y-6">
-                        <p className="text-2xl text-zinc-500 font-normal leading-snug">
+                        <p className="text-xl text-zinc-500 font-normal leading-snug">
                             你好，我是 <span className="dark:text-yellow-300 text-yellow-400 font-extrabold text-lg">Chrisy</span>
                         </p>
                         <p className="text-base text-zinc-500 leading-relaxed max-w-md">
