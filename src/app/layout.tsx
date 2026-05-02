@@ -6,6 +6,7 @@ import { ThemeProvider } from "next-themes";
 import { clsx } from "clsx";
 import Footer from "@/components/ui/footer";
 import Header from "@/components/ui/header";
+import SplashScreen from "@/components/ui/splash-screen";
 
 export const viewport: Viewport = {
     themeColor: [
@@ -60,6 +61,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         ) }>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
             <div className="flex flex-col min-h-svh">
+                <SplashScreen/>
                 <Header/>
                 <main className="flex flex-col grow">
                     { children }
