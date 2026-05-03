@@ -67,7 +67,7 @@ export default function About() {
                             </div>
                         </div>
 
-                        <div className={ clsx("relative p-6 md:p-8 font-mono text-sm", maple.className) }>
+                        <div className={ clsx("relative p-6 md:p-8 font-mono text-sm overflow-y-auto", maple.className) }>
                             <div className="absolute right-0 top-0 h-32 w-32 rounded-full bg-blue-500/20 blur-3xl"></div>
                             <CodeLine number="01">
                                 <span className="text-blue-400">const</span>
