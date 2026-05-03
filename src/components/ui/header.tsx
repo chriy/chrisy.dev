@@ -14,7 +14,7 @@ export default function Header() {
     const [colspan, setColspan] = useState(false);
     return (
         <header className={clsx("sticky top-0 z-50 w-full transition-all duration-300 select-none", nunito.className)}>
-            <div className="mx-auto w-full sm:w-fit m-h-16 sm:mt-6 sm:py-1 py-1 px-1 sm:rounded-full sm:border border-white/40 dark:border-white/10 shadow-md shadow-neutral-200/20 dark:shadow-black/40 backdrop-blur-xl backdrop-saturate-150 bg-white/60 dark:bg-[#09090b]/60 transition-colors">
+            <div className="mx-auto w-full md:w-fit m-h-16 md:mt-6 md:py-1 py-1 px-1 md:rounded-full md:border border-white/40 dark:border-white/10 shadow-md shadow-neutral-200/20 dark:shadow-black/40 backdrop-blur-xl backdrop-saturate-150 bg-white/60 dark:bg-[#09090b]/60 transition-colors">
                 <div className="flex items-center justify-between w-full h-12 pl-1 pr-4">
                     {/* Left: Logo area */}
                     <div className="flex items-center gap-3">
@@ -28,7 +28,7 @@ export default function Header() {
                                     loading="eager"
                                 />
                             </div>
-                            <span className="text-md lg:text-lg font-extrabold text-neutral-800 dark:text-neutral-100 tracking-tight transition-all">
+                            <span className="text-md md:text-lg font-extrabold text-neutral-800 dark:text-neutral-100 tracking-tight transition-all">
                                 Chrisy<span className="bg-clip-text text-transparent bg-linear-to-r from-blue-600 to-blue-400 dark:from-blue-500 dark:to-cyan-400">.dev</span>
                             </span>
                         </Link>
@@ -40,11 +40,11 @@ export default function Header() {
                     </div>
 
                     {/* Structural Divider 2 */}
-                    <div className="hidden md:block w-px h-4 bg-zinc-200 dark:bg-zinc-800 mx-4 opacity-100" />
+                    <div className="hidden md:block w-px h-4 bg-zinc-200 dark:bg-zinc-800 mx-4 opacity-100"/>
 
                     {/* Right: Theme & Hamburger */}
                     <div className="flex items-center gap-3">
-                        <div className="scale-90 sm:scale-100 px-1">
+                        <div className="scale-90 md:scale-100 px-1">
                             <Theme />
                         </div>
 
