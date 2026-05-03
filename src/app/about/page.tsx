@@ -34,9 +34,13 @@ export default function About() {
                             Notes, and a little light.
                         </h1>
                         <p className="mt-7 max-w-md text-base leading-8 text-zinc-600 dark:text-zinc-400">
+                            2021 年毕业于长沙大学 (Changsha University) 计算机专业。目前以后端开发为主，同时也能独立做前端开发。
+                        </p>
+                        <p className="mt-7 max-w-md text-base leading-8 text-zinc-600 dark:text-zinc-400">
                             在碎片化的时代，留一个安静的角落，记录技术上的坑与路，以及生活中的一些光影。
                         </p>
                         <PixelCamera/>
+                        <SiteTimeline/>
                     </div>
                 </div>
 
@@ -152,6 +156,62 @@ const CodeLine = ({ number, children }: {
         <div className="relative z-10 flex gap-4 py-1.5 whitespace-nowrap">
             <span className="w-6 shrink-0 text-right text-zinc-700">{ number }</span>
             <span>{ children }</span>
+        </div>
+    );
+};
+
+const timeline = [
+    {
+        year: "2018",
+        title: "手写 Markdown",
+        desc: "大学时代，用编辑器手写 Markdown，本地预览便是全部。",
+    },
+    {
+        year: "2019",
+        title: "Hexo 时代",
+        desc: "接触 Hexo，第一次感受到静态博客的生成魔力，开始折腾主题与部署。",
+    },
+    {
+        year: "2021",
+        title: "自建 & 丢失",
+        desc: "购入云服务器，自建 Halo 博客。忘记续费，数据全部丢失。",
+    },
+    {
+        year: "2023",
+        title: "GitHub Pages",
+        desc: "重新出发，用 GitHub Pages 托管，简单可靠，但可定制性有限。",
+    },
+    {
+        year: "2026",
+        title: "Cloudflare 全家桶",
+        desc: "全面迁移至 Cloudflare：Pages 部署、DNS、CDN、边缘函数，一站全托管。",
+    },
+];
+
+const SiteTimeline = () => {
+    return (
+        <div className="mt-14 select-none" aria-hidden="true">
+            <p className={ clsx("mb-6 text-xs font-bold uppercase tracking-[0.35em] text-blue-500", maple.className) }>
+                site evolution
+            </p>
+            <div className="relative border-l border-zinc-200 dark:border-zinc-900 space-y-8">
+                { timeline.map((item, _) => (
+                    <div key={ item.year } className="relative pl-6">
+                        <span className="absolute left-0 top-0.5 -translate-x-1/2 flex h-3.5 w-3.5 items-center justify-center rounded-full border-2 border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-950">
+                            <span className="h-1.5 w-1.5 rounded-full bg-blue-500"/>
+                        </span>
+                        <span className={ clsx("text-[10px] font-bold uppercase tracking-widest text-zinc-400", maple.className) }>
+                            { item.year }
+                        </span>
+                        <h3 className={ clsx("mt-1 font-black text-zinc-900 dark:text-white", nunito.className) }>
+                            { item.title }
+                        </h3>
+                        <p className="mt-1 text-[14px] leading-6 text-zinc-500 dark:text-zinc-400 max-w-xs">
+                            { item.desc }
+                        </p>
+                    </div>
+                )) }
+            </div>
         </div>
     );
 };
