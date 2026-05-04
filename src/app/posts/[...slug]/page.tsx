@@ -13,15 +13,9 @@ interface PageProps {
 export async function generateStaticParams() {
     const posts = await PostsContext.all();
 
-    // The PostsContext returns slugs including the 'posts/' directory.
-    // Since this catch-all route is already inside /src/app/posts/, 
-    // we must strip the 'posts' segment from the params to match correctly.
-    return posts.map((post) => {
-        const segments = post.slug.split('/');
-        return {
-            slug: segments[0] === 'posts' ? segments.slice(1) : segments,
-        };
-    });
+    return posts.map((post) => ({
+        slug: post.slug.split('/'),
+    }));
 }
 
 /**

@@ -207,7 +207,7 @@ const FilmCard = ({ post, index }: { post: Post, index: number }) => {
                         </div>
                         <div className="w-px h-12 bg-zinc-300 dark:bg-zinc-700"></div>
                     </div>
-                    <Link href={ post.slug } className="block cursor-pointer">
+                    <Link href={ `/posts/${ post.slug }` } className="block cursor-pointer">
                         <div className={ clsx(
                             "relative flex h-80 min-w-64 flex-col justify-between overflow-hidden px-6 py-10 transition-colors duration-500",
                             "bg-zinc-50 dark:bg-transparent shadow-2xl shadow-zinc-200/70 dark:shadow-none border border-zinc-200/80 group-hover:border-indigo-300/70 dark:border-transparent dark:group-hover:border-indigo-400/30 rounded-xs"

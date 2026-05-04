@@ -26,7 +26,7 @@ export type Slug = {
 
 export class PostsContext {
     // mdx path
-    private static readonly rootDirectory = path.join(process.cwd(), 'src/content');
+    private static readonly rootDirectory = path.join(process.cwd(), 'content');
     private static readonly suffix = ".mdx"
 
     /**
@@ -66,7 +66,7 @@ export class PostsContext {
         const posts = this.fetchMDXFiles(this.rootDirectory, []).slice(0, limit || undefined)
         const metadata = (await Promise.all(posts.map(async post => {
             const slug = post.type === 'file' ? post.slug : `${post.slug}/index`
-            const mod = await import(`@/content/${slug}.mdx`);
+            const mod = await import(`@content/${ slug }.mdx`);
             if (!mod.metadata) return null
             return { slug: post.slug, metadata: PostMetadataSchema.parse(mod.metadata) } satisfies Post;
         }))).filter((p): p is Post => p != null)
@@ -84,11 +84,11 @@ export class PostsContext {
         const fullSlug = slug.join('/')
         try {
             // Dynamic import
-            const filepath = [`posts/${fullSlug}/index.mdx`, `posts/${fullSlug}.mdx`].find(dir => fs.existsSync(path.join(this.rootDirectory, dir)))
+            const filepath = [`${ fullSlug }/index.mdx`, `${ fullSlug }.mdx`].find(dir => fs.existsSync(path.join(this.rootDirectory, dir)))
 
             if (!filepath) return null
 
-            const mod = await import(`@/content/${filepath}`);
+            const mod = await import(`@content/${ filepath }`);
             return {
                 metadata: PostMetadataSchema.parse(mod.metadata),
                 default: mod.default,

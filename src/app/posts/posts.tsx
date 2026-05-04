@@ -302,7 +302,7 @@ const PostItem = ({ post, index }: { post: Post; index: number }) => {
                 </div>
             </div>
 
-            <Link href={`/${post.slug}`} className="block relative py-8 px-2 md:px-8 rounded-2xl transition-all duration-500 bg-transparent hover:bg-zinc-100/50 dark:hover:bg-zinc-800/10 group/card overflow-hidden">
+            <Link href={ `/posts/${ post.slug }` } className="block relative py-8 px-2 md:px-8 rounded-2xl transition-all duration-500 bg-transparent hover:bg-zinc-100/50 dark:hover:bg-zinc-800/10 group/card overflow-hidden">
                 <article className="relative z-10 flex flex-col gap-4">
                     {/* Meta Row */}
                     <div className="flex items-center flex-wrap gap-x-5 gap-y-2">
