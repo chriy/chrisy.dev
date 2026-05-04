@@ -38,8 +38,8 @@ Hi, I'm Chrisy — a software engineer who writes code and takes photos.
 ## Project Structure
 
 ```
-content/
-src/                      # MDX posts, organized by directory
+content/                  # MDX posts, organized by directory
+src/                     
 ├── app/                  # Next.js App Router pages
 │   ├── about/            # About page
 │   ├── posts/            # Post list & [...slug] dynamic routes
