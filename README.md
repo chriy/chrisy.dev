@@ -38,7 +38,8 @@ Hi, I'm Chrisy — a software engineer who writes code and takes photos.
 ## Project Structure
 
 ```
-src/
+content/
+src/                      # MDX posts, organized by directory
 ├── app/                  # Next.js App Router pages
 │   ├── about/            # About page
 │   ├── posts/            # Post list & [...slug] dynamic routes
@@ -46,8 +47,6 @@ src/
 ├── components/
 │   ├── mdx/              # MDX custom components (code, callout, catalog, table...)
 │   └── ui/               # Shared UI components (header, footer, hero, theme...)
-├── content/
-│   └── posts/            # MDX posts, organized by directory
 ├── lib/                  # Utilities (posts loader, shiki config, fonts)
 ├── images/               # Static images
 └── styles/               # Global styles
@@ -68,7 +67,7 @@ npm build
 
 ## Writing Posts
 
-Create a `.mdx` file under `src/content/posts/`. Nested directories are supported. You must `export metadata` or the
+Create a `.mdx` file under `content`. Nested directories are supported. You must `export metadata` or the
 build will fail:
 
 ```mdx

@@ -36,6 +36,7 @@
 ## 目录结构
 
 ```
+content/                  # MDX 文章，按目录组织
 src/
 ├── app/                  # Next.js App Router 页面
 │   ├── about/            # 关于页
@@ -43,9 +44,7 @@ src/
 │   └── layout.tsx        # 根布局 (Metadata, Theme, Header, Footer)
 ├── components/
 │   ├── mdx/              # MDX 自定义组件 (code, callout, catalog, table...)
-│   └── ui/               # 通用 UI 组件 (header, footer, hero, theme...)
-├── content/
-│   └── posts/            # MDX 文章，按目录组织
+│   └── ui/               # 通用 UI 组件 (header, footer, hero, theme...)    
 ├── lib/                  # 工具函数 (posts 读取, shiki 配置, 字体加载)
 ├── images/               # 静态图片
 └── styles/               # 全局样式
@@ -66,7 +65,7 @@ npm build
 
 ## 写文章
 
-在 `src/content/posts/` 下创建 `.mdx` 文件，支持多级目录，必须 `export metadata` 否则构建失败：
+在 `content` 下创建 `.mdx` 文件，支持多级目录，必须 `export metadata` 否则构建失败：
 
 ```mdx
 export const metadata = {
