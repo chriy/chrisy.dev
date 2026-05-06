@@ -19,6 +19,10 @@ import {
 import Image from "next/image";
 import { Highlight } from "@/components/mdx/highlight";
 import { Code, CodeBlock } from "@/components/mdx/code";
+import { Callout } from "@/components/mdx/callout";
+import { Catalog } from "@/components/mdx/catalog";
+import { Tag } from "@/components/mdx/tag";
+import Table from "@/components/mdx/table";
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
     return {
@@ -42,6 +46,10 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         code: Code,
         pre: CodeBlock,
         del: DeleteLine,
+        Callout,
+        Catalog,
+        Tag,
+        Table,
         ...components,
     }
 }
