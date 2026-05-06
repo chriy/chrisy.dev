@@ -63,7 +63,7 @@ export class PostsContext {
     }
 
     static async all({ limit = 0 }: { limit?: number } = {}): Promise<Post[]> {
-        const posts = this.fetchMDXFiles(this.rootDirectory, []).slice(0, limit || undefined)
+        const posts = this.fetchMDXFiles(this.rootDirectory, [])
         const metadata = (await Promise.all(posts.map(async post => {
             const slug = post.type === 'file' ? post.slug : `${post.slug}/index`
             const mod = await import(`@content/${ slug }.mdx`);
@@ -71,9 +71,10 @@ export class PostsContext {
             return { slug: post.slug, metadata: PostMetadataSchema.parse(mod.metadata) } satisfies Post;
         }))).filter((p): p is Post => p != null)
         // Sort in descending order by date
-        return metadata.sort((a: Post, b: Post) => {
+        const sorted = metadata.sort((a: Post, b: Post) => {
             return new Date(b.metadata.date).getTime() - new Date(a.metadata.date).getTime()
         })
+        return limit > 0 ? sorted.slice(0, limit) : sorted
     }
 
     /**
