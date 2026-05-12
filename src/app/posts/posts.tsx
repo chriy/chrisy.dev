@@ -492,40 +492,36 @@ const FetchMoreButton = ({
     displayLimit: number;
     totalFiltered: number
 }) => {
+    const remaining = totalFiltered - displayLimit;
+
     return (
         <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mt-12 flex justify-center md:justify-start md:pl-20 px-4 md:px-0"
+            className="mt-12 flex justify-center"
         >
             <button
                 onClick={onClick}
-                className="group relative flex items-center transition-all duration-500"
+                className="group relative flex items-center gap-3 px-6 py-3 rounded-xl border border-dashed border-zinc-200 dark:border-zinc-800/80 hover:border-blue-400/30 hover:bg-zinc-100/50 dark:hover:bg-zinc-800/20 transition-all duration-500"
             >
-                {/* Timeline Integration Node */}
-                <div className="absolute left-10 top-4 -translate-x-1/2 hidden md:flex items-center justify-center z-20">
-                    <div className="relative">
-                        <div className="w-2.5 h-2.5 rounded-full bg-theme-light dark:bg-theme-dark border-2 border-zinc-200 dark:border-zinc-800/80 group-hover:border-blue-400 group-hover:bg-blue-400 group-active:scale-90 transition-all duration-500 shadow-sm" />
-                        <div className="absolute inset-0 bg-blue-400/20 rounded-full scale-[2.5] opacity-0 group-hover:opacity-100 group-hover:animate-ping pointer-events-none" />
-                    </div>
-                </div>
+                <span className="relative flex items-center justify-center">
+                    <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse"/>
+                    <span className="absolute inset-0 rounded-full bg-blue-400/30 animate-ping"/>
+                </span>
 
-                {/* Simplified Button Content */}
-                <div className="flex items-center gap-3 px-6 py-3 rounded-xl border border-dashed border-zinc-200 dark:border-zinc-800/80 hover:border-blue-400/30 hover:bg-zinc-100/50 dark:hover:bg-zinc-800/20 transition-all duration-500">
-                    <span className={clsx(
-                        "text-xs font-black uppercase tracking-[0.6em] text-zinc-400 group-hover:text-blue-500 transition-colors pl-1",
-                        maple.className
-                    )}>
-                        More
-                    </span>
-                    <span className="w-px h-3 bg-zinc-200 dark:bg-zinc-800/80 group-hover:bg-blue-300/30 transition-colors" />
-                    <span className={clsx(
-                        "text-xs font-bold text-zinc-300 dark:text-zinc-600 group-hover:text-blue-400/60 transition-colors",
-                        nunito.className
-                    )}>
-                        {totalFiltered - displayLimit}
-                    </span>
-                </div>
+                <span className={ clsx(
+                    "text-xs font-black uppercase tracking-[0.6em] text-zinc-400 group-hover:text-blue-500 transition-colors",
+                    maple.className
+                ) }>
+                    More
+                </span>
+                <span className="w-px h-3 bg-zinc-200 dark:bg-zinc-800/80 group-hover:bg-blue-300/30 transition-colors"/>
+                <span className={ clsx(
+                    "text-xs font-bold text-zinc-300 dark:text-zinc-600 group-hover:text-blue-400/60 transition-colors",
+                    nunito.className
+                ) }>
+                    { remaining }
+                </span>
             </button>
         </motion.div>
     );
