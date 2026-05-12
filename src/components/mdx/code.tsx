@@ -78,7 +78,7 @@ const ActionButtons = ({ isWrap, onToggleWrap, rawCode }: {
 };
 
 export const CodeBlock = ({ children }: { children: React.ReactNode }) => {
-    const rawCode = extractText(children);
+    const rawCode = extractText(children).replace(/\n+$/, '');
     const lang = detectLang(children);
     const resolvedLang = LANG_ALIAS[ lang ] ?? lang;
     const langLabel = LANG_LABELS[ resolvedLang ] ?? resolvedLang;
@@ -93,7 +93,7 @@ export const CodeBlock = ({ children }: { children: React.ReactNode }) => {
 
     return (
         <div className={ clsx(
-            "shiki-renderer group my-10 overflow-hidden rounded-xl border border-zinc-200 dark:border-white/10 bg-[#09090b] shadow-2xl transition-all duration-300 hover:shadow-indigo-500/10",
+            "shiki-renderer group my-10 overflow-hidden rounded-xl border bg-[#1e1e2e] dark:bg-[#09090b] border-zinc-300 dark:border-white/10",
             isWrap && "shiki-wrap"
         ) }>
             {/* Header Bar */ }
