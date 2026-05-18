@@ -188,6 +188,8 @@ const SearchHeader = ({
     searchQuery: string;
     setSearchQuery: SetState<string>;
 }) => {
+    const [isFocused, setIsFocused] = useState(false);
+
     return (
         <motion.div
             initial={{ opacity: 0, y: -20 }}
@@ -231,20 +233,20 @@ const SearchHeader = ({
                                         "w-full bg-transparent focus:outline-none text-zinc-900 dark:text-white font-bold text-xl md:text-3xl leading-none tracking-tight px-6 caret-transparent cursor-text",
                                         maple.className
                                     )}
+                                    onFocus={() => setIsFocused(true)}
+                                    onBlur={() => setIsFocused(false)}
                                 />
-                                <motion.span
-                                    animate={{ opacity: [1, 0.3, 1], scaleY: [1, 0.95, 1] }}
-                                    transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}
-                                    className="absolute left-0 top-1/2 -translate-y-1/2 w-[2.5px] h-[0.7em] bg-blue-500 shadow-[0_0_15px_rgba(59,130,246,0.5)] opacity-0 group-focus-within/search:opacity-100 transition-opacity pointer-events-none"
-                                />
+                                <span className="absolute left-0 top-1/2 -translate-y-1/2 w-[2.5px] h-[0.7em] bg-blue-500 shadow-[0_0_15px_rgba(59,130,246,0.5)] opacity-0 group-focus-within/search:opacity-100 transition-opacity pointer-events-none animate-pulse" />
 
                                 {/* Subtle Data-Flow Bottom Border - Just the moving light */}
                                 <div className="absolute bottom-0 left-1 right-0 h-px overflow-hidden opacity-0 group-hover/search:opacity-100 group-focus-within/search:opacity-100 transition-opacity duration-700">
-                                    <motion.div
-                                        animate={{ x: ['-100%', '200%'] }}
-                                        transition={{ repeat: Infinity, duration: 3, ease: "linear" }}
-                                        className="w-[40%] h-full bg-linear-to-r from-transparent via-blue-500/50 dark:via-blue-400/40 to-transparent"
-                                    />
+                                    {isFocused && (
+                                        <motion.div
+                                            animate={{ x: ['-100%', '200%'] }}
+                                            transition={{ repeat: Infinity, duration: 3, ease: "linear" }}
+                                            className="w-[40%] h-full bg-linear-to-r from-transparent via-blue-500/50 dark:via-blue-400/40 to-transparent"
+                                        />
+                                    )}
                                 </div>
                             </div>
 
@@ -289,7 +291,7 @@ const PostItem = ({ post, index }: { post: Post; index: number }) => {
             {/* Commit Node */}
             <div className="absolute left-10 top-6 -translate-x-1/2 hidden md:flex items-center justify-center z-10">
                 <div className="relative">
-                    <div className="absolute inset-0 bg-blue-400/10 rounded-full scale-[2] animate-pulse" />
+                    <div className="absolute inset-0 bg-blue-400/10 rounded-full scale-[2] group-hover:animate-pulse" />
                     <div className="absolute inset-0 bg-blue-400/20 rounded-full scale-[2.5] opacity-0 group-hover:opacity-100 group-hover:animate-ping transition-all duration-500" />
                     <div className="w-2.5 h-2.5 rounded-full bg-theme-light dark:bg-theme-dark border-2 border-zinc-200 dark:border-zinc-800 group-hover:border-blue-400 group-hover:bg-blue-400 relative transition-all duration-300 shadow-sm" />
                 </div>
@@ -506,7 +508,7 @@ const FetchMoreButton = ({
             >
                 <span className="relative flex items-center justify-center">
                     <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse"/>
-                    <span className="absolute inset-0 rounded-full bg-blue-400/30 animate-ping"/>
+                    <span className="absolute inset-0 rounded-full bg-blue-400/30 group-hover:animate-ping"/>
                 </span>
 
                 <span className={ clsx(
