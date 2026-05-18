@@ -270,7 +270,7 @@ const Bot = () => {
             <motion.div
                 initial={{ y: -25, opacity: 0, scale: 0.8 }}
                 animate={{ y: 6, opacity: 1, scale: 1 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
+                transition={{ duration: 2.5, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
                 className="absolute bottom-2 w-12 h-14 bg-white dark:bg-zinc-200 border border-zinc-300 dark:border-zinc-400 rounded flex flex-col items-center pt-1.5 z-0 shadow-sm"
             >
                 <div className="w-9 h-7 bg-zinc-200 dark:bg-zinc-300 rounded-xs mb-1"></div>
