@@ -44,7 +44,7 @@ export default function Contact() {
             <div className="flex md:flex-row flex-col">
                 <div className="flex-1 py-8">
                     <div className="flex items-center gap-4 w-full justify-start py-8">
-                        <Radio className="text-blue-500 animate-pulse" size={18}/>
+                        <Radio className="text-blue-500" size={18}/>
                         <span className={'text-[10px] font-mono tracking-[0.8em] uppercase dark:text-zinc-600 text-zinc-400'}>
                         ping chrisy.dev
                     </span>
