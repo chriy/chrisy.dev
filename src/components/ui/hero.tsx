@@ -33,7 +33,7 @@ export default function Hero() {
 
                     <div className="hidden lg:flex items-center gap-3 not-italic">
                         <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center">
-                            <Target size={18} className="text-blue-500 animate-pulse"/>
+                            <Target size={18} className="text-blue-500"/>
                         </div>
                         <div className="flex flex-col">
                             <span className="text-[10px] font-bold text-zinc-600 uppercase tracking-widest leading-none">Focus Status</span>
@@ -74,8 +74,8 @@ export default function Hero() {
                     <div className="transition-transform duration-700 hover:-translate-y-1">
                         <div className="relative overflow-hidden rounded-3xl border border-zinc-800/70 bg-zinc-950/95 font-mono text-sm text-zinc-400 group">
 
-                            <div className="pointer-events-none absolute right-0 top-0 h-40 w-56 bg-blue-500/7 blur-3xl"></div>
-                            <div className="pointer-events-none absolute bottom-0 left-0 h-32 w-44 bg-emerald-500/3 blur-3xl"></div>
+                            <div className="pointer-events-none absolute right-0 top-0 h-40 w-56 bg-blue-500/7 blur-xl"></div>
+                            <div className="pointer-events-none absolute bottom-0 left-0 h-32 w-44 bg-emerald-500/3 blur-xl"></div>
 
                             <div className="relative z-10 flex items-center justify-between border-b border-white/[0.07] bg-white/2 px-5 py-4">
                                 <div className="flex items-center gap-2">
