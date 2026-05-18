@@ -29,21 +29,13 @@ export default function LatestPost({ posts }: { posts: Post[] }) {
     useEffect(() => {
         updateScrollState();
 
-        const track = trackRef.current;
-
-        if (!track) {
-            return;
-        }
-
-        const resizeObserver = new ResizeObserver(updateScrollState);
-        resizeObserver.observe(track);
         window.addEventListener('resize', updateScrollState);
+        document.fonts.ready.then(() => updateScrollState());
 
         return () => {
-            resizeObserver.disconnect();
             window.removeEventListener('resize', updateScrollState);
         };
-    }, [posts.length, updateScrollState]);
+    }, [updateScrollState]);
 
     const scrollFilm = (direction: 'prev' | 'next') => {
         const track = trackRef.current;
@@ -87,13 +79,7 @@ export default function LatestPost({ posts }: { posts: Post[] }) {
                                 <span className="text-emerald-500 dark:text-emerald-400">5</span>
                                 <span className="ml-4 text-zinc-800 dark:text-zinc-200">~/posts</span>
 
-                                <motion.div
-                                    animate={ {
-                                        opacity: [1, 0, 1],
-                                    } }
-                                    transition={ { duration: 1.5, repeat: Infinity } }
-                                    className="w-2.5 h-8 md:h-9 bg-indigo-500 ml-4 shadow-[0_0_15px_rgba(99,102,241,0.5)]"
-                                />
+                                <div className="w-2.5 h-8 md:h-9 bg-indigo-500 ml-4 shadow-[0_0_15px_rgba(99,102,241,0.5)] animate-pulse" />
                             </h2>
                         </div>
                         <div className="hidden translate-y-2 md:block">
@@ -193,11 +179,11 @@ const FilmCard = ({ post, index }: { post: Post, index: number }) => {
                 }}
             >
                 <motion.div
-                    animate={{
-                        rotate: [deg, -deg, deg],
+                    whileHover={{
+                        rotate: [0, -deg * 3, deg * 3, 0],
                     }}
                     transition={{
-                        rotate: { duration: 4, repeat: Infinity, ease: "easeInOut" }
+                        rotate: { duration: 0.8, ease: "easeInOut" }
                     }}
                     style={{ transformOrigin: 'top center' }}
                 >
@@ -212,8 +198,8 @@ const FilmCard = ({ post, index }: { post: Post, index: number }) => {
                             "relative flex h-80 min-w-64 flex-col justify-between overflow-hidden px-6 py-10 transition-colors duration-500",
                             "bg-zinc-50 dark:bg-transparent shadow-2xl shadow-zinc-200/70 dark:shadow-none border border-zinc-200/80 group-hover:border-indigo-300/70 dark:border-transparent dark:group-hover:border-indigo-400/30 rounded-xs"
                         ) }>
-                            <FilmSprockets className="top-0 bg-zinc-50/90 backdrop-blur-md dark:bg-black border-b border-zinc-200/60 dark:border-white/10"/>
-                            <FilmSprockets className="bottom-0 bg-zinc-50/90 backdrop-blur-md dark:bg-black border-t border-zinc-200/60 dark:border-white/10"/>
+                            <FilmSprockets className="top-0 bg-zinc-50/90 dark:bg-black border-b border-zinc-200/60 dark:border-white/10"/>
+                            <FilmSprockets className="bottom-0 bg-zinc-50/90 dark:bg-black border-t border-zinc-200/60 dark:border-white/10"/>
                             <span className="absolute -right-4 bottom-4 text-9xl font-black text-black/5 dark:text-white/5 select-none rotate-30 scale-200 -translate-y-8">{ index + 1 }</span>
                             <div className="relative z-10 flex justify-between items-center">
                                 <span className="text-[10px] font-mono text-zinc-500 font-bold uppercase tracking-tight">POST_{ (index + 1).toString().padStart(2, '0') }</span>
@@ -284,7 +270,7 @@ const Bot = () => {
             <motion.div
                 initial={{ y: -25, opacity: 0, scale: 0.8 }}
                 animate={{ y: 6, opacity: 1, scale: 1 }}
-                transition={{ duration: 2.5, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
                 className="absolute bottom-2 w-12 h-14 bg-white dark:bg-zinc-200 border border-zinc-300 dark:border-zinc-400 rounded flex flex-col items-center pt-1.5 z-0 shadow-sm"
             >
                 <div className="w-9 h-7 bg-zinc-200 dark:bg-zinc-300 rounded-xs mb-1"></div>
@@ -292,8 +278,9 @@ const Bot = () => {
             </motion.div>
 
             <motion.div
-                animate={{ y: [-3, 2, -3] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                initial={{ y: -3 }}
+                animate={{ y: 0 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
                 className="relative z-10"
             >
                 <svg
@@ -312,8 +299,9 @@ const Bot = () => {
                     <rect x="3" y="6" width="18" height="13" rx="3" className="fill-[#fafafa] dark:fill-[#121212] transition-colors"/>
                     <rect x="5" y="8" width="14" height="9" rx="1.5" className="stroke-zinc-300 dark:stroke-zinc-700/50"/>
                     <motion.g
-                        animate={{ scaleY: [1, 1, 0.1, 1, 1] }}
-                        transition={{ duration: 4, repeat: Infinity, times: [0, 0.9, 0.95, 0.98, 1] }}
+                        initial={{ scaleY: 1 }}
+                        animate={{ scaleY: [1, 0.1, 1] }}
+                        transition={{ duration: 0.3, delay: 1.5, ease: "easeInOut" }}
                         style={{ transformOrigin: "center 12px" }}
                     >
                         <path d="M 7.5 10.5 L 9 11.5 L 7.5 12.5" className="stroke-zinc-500 dark:stroke-zinc-400"/>
