@@ -71,7 +71,6 @@ export const Highlight = ({
             });
 
             resizeObserver.observe(element);
-            resizeObserver.observe(document.body);
         }
 
         return () => {
