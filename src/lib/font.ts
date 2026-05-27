@@ -1,13 +1,4 @@
 import localFont from "next/font/local"
-
-// chinese
-export const noto = localFont({
-    style: 'normal',
-    src: '../../public/fonts/noto-sans-variable.woff2',
-    variable: '--font-noto-sans-sc',
-    display: "swap",
-})
-
 // english and number
 export const nunito = localFont({
     src: [{

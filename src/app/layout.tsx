@@ -1,7 +1,7 @@
 import '@/styles/global.css';
 import React from "react";
 import { Metadata, Viewport } from "next";
-import { maple, noto, nunito } from "@/lib/font";
+import { maple } from "@/lib/font";
 import { ThemeProvider } from "next-themes";
 import { clsx } from "clsx";
 import Footer from "@/components/ui/footer";
@@ -57,7 +57,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     return (
         <html lang="en" className='no-scrollbar' suppressHydrationWarning>
         <body className={ clsx(
-            "bg-theme-light dark:bg-theme-dark transition-colors duration-300", nunito.className, noto.className, maple.className
+            "bg-theme-light dark:bg-theme-dark transition-colors duration-300", maple.className
         ) }>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
             <div className="flex flex-col min-h-svh">
