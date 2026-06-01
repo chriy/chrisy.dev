@@ -75,6 +75,11 @@ const profileCodeLines: TerminalLine[] = [
         { text: "{", className: "text-zinc-500" },
     ]),
     createCodeLine([
+        { text: "    name:", className: "text-zinc-400" },
+        { text: ' "Chris Yang"', className: "text-emerald-400" },
+        { text: ",", className: "text-zinc-500" },
+    ], true),
+    createCodeLine([
         { text: "    role:", className: "text-zinc-400" },
         { text: ' "Software Engineer"', className: "text-emerald-400" },
         { text: ",", className: "text-zinc-500" },
