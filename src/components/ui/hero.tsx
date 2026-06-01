@@ -1,4 +1,5 @@
 'use client'
+import React, { FormEvent, KeyboardEvent, useEffect, useRef, useState } from "react";
 import { Target } from "lucide-react";
 import { clsx } from "clsx";
 import { maple, nunito } from "@/lib/font";
@@ -6,7 +7,380 @@ import Image from "next/image";
 import pin from '../../images/pin.png'
 import { LineDivider } from "@/components/mdx/article";
 
+type TerminalLine =
+    | { type: "prompt"; command: string }
+    | { type: "code"; content: React.ReactNode; segments?: TerminalCodeSegment[]; nowrap?: boolean }
+    | { type: "output"; content: string; colorClassName?: string }
+    | { type: "error"; content: string }
+
+type TerminalCodeSegment = {
+    text: string;
+    className?: string;
+}
+
+type CommandResult = {
+    lines?: string[];
+    terminalLines?: TerminalLine[];
+    redirectTo?: string;
+}
+
+const githubUrl = "https://github.com/chriy";
+const bootCommand = "whoami";
+const terminalOutputColors = [
+    "text-emerald-400",
+    "text-sky-400",
+    "text-violet-300",
+    "text-amber-300",
+    "text-rose-300",
+    "text-teal-300",
+];
+
+const renderCodeSegments = (segments: TerminalCodeSegment[], visibleCharacters?: number) => {
+    let remainingCharacters = visibleCharacters ?? segments.reduce((total, segment) => total + segment.text.length, 0);
+
+    return segments.map((segment, index) => {
+        const visibleText = segment.text.slice(0, Math.max(0, remainingCharacters));
+        remainingCharacters -= segment.text.length;
+
+        if (!visibleText) {
+            return null;
+        }
+
+        return (
+            <span key={ index } className={ clsx("whitespace-pre", segment.className) }>
+                { visibleText }
+            </span>
+        );
+    });
+};
+
+const getCodeLineLength = (line: TerminalLine) => (
+    line.type === "code" && line.segments
+        ? line.segments.reduce((total, segment) => total + segment.text.length, 0)
+        : 0
+);
+
+const createCodeLine = (segments: TerminalCodeSegment[], nowrap = false): TerminalLine => ({
+    type: "code",
+    nowrap,
+    segments,
+    content: renderCodeSegments(segments),
+});
+
+const profileCodeLines: TerminalLine[] = [
+    createCodeLine([
+        { text: "const", className: "text-blue-500/90" },
+        { text: " Profile", className: "text-zinc-100" },
+        { text: " = ", className: "text-zinc-500" },
+        { text: "{", className: "text-zinc-500" },
+    ]),
+    createCodeLine([
+        { text: "    role:", className: "text-zinc-400" },
+        { text: ' "Software Engineer"', className: "text-emerald-400" },
+        { text: ",", className: "text-zinc-500" },
+    ], true),
+    createCodeLine([
+        { text: "    stack:", className: "text-zinc-400" },
+        { text: ' ["Java", "TypeScript", "Node.js"]', className: "text-emerald-400" },
+        { text: ",", className: "text-zinc-500" },
+    ], true),
+    createCodeLine([
+        { text: "    passion:", className: "text-zinc-400" },
+        { text: ' "Photography (Sony α7M4)"', className: "text-emerald-400" },
+    ], true),
+    createCodeLine([
+        { text: "}", className: "text-zinc-500" },
+    ]),
+];
+
+const initialTerminalLines: TerminalLine[] = [
+    { type: "prompt", command: bootCommand },
+    ...profileCodeLines,
+];
+
+const menuOutputLines = [
+    "╭─ Chrisy's tiny terminal menu",
+    "│ whoami  → print the human behind the pixels",
+    "│ git    → open the GitHub constellation",
+    "│ about   → jump to the about page",
+    "│ post    → browse the writing archive",
+    "│ hi      → unlock a small easter egg",
+    "│ hh      → double-tap h, if you like secret doors",
+    "│ clean   → sweep the desk, keep the portrait",
+    "╰─ hint: curiosity is a valid command, even when the shell disagrees.",
+];
+
+const commandOutput: Record<string, CommandResult> = {
+    help: {
+        lines: menuOutputLines,
+    },
+    menu: {
+        lines: menuOutputLines,
+    },
+    whoami: {
+        terminalLines: profileCodeLines,
+    },
+    hi: {
+        lines: [
+            "✦ secret_found: /chrisy",
+            "  [O]  _ ",
+            "  [_/\\_(_)  \"If you found this, the site likes you back.\""
+        ],
+    },
+    git: {
+        lines: [
+            "Opening GitHub orbit...",
+            "If the stars align, you will land on Chrisy's profile.",
+        ],
+        redirectTo: githubUrl,
+    },
+    about: {
+        lines: [
+            "Routing to ~/about...",
+            "Packing the coffee, lenses, and a few stray thoughts.",
+        ],
+        redirectTo: "/about",
+    },
+    post: {
+        lines: [
+            "Routing to ~/posts...",
+            "Opening the archive drawer. Mind the dust, some ideas bite.",
+        ],
+        redirectTo: "/posts",
+    },
+    posts: {
+        lines: [
+            "Routing to ~/posts...",
+            "Opening the archive drawer. Mind the dust, some ideas bite.",
+        ],
+        redirectTo: "/posts",
+    },
+};
+
 export default function Hero() {
+    const [terminalLines, setTerminalLines] = useState<TerminalLine[]>([]);
+    const [command, setCommand] = useState("");
+    const [bootCommandText, setBootCommandText] = useState("");
+    const [hasBooted, setHasBooted] = useState(false);
+    const [typedLine, setTypedLine] = useState("");
+    const [typedCodeLine, setTypedCodeLine] = useState<{ line: TerminalLine; visibleCharacters: number } | null>(null);
+    const [pendingLines, setPendingLines] = useState<string[]>([]);
+    const [pendingTerminalLines, setPendingTerminalLines] = useState<TerminalLine[]>([]);
+    const [redirectTo, setRedirectTo] = useState<string | null>(null);
+    const inputRef = useRef<HTMLInputElement>(null);
+    const terminalBodyRef = useRef<HTMLDivElement>(null);
+    const lastHKeyAtRef = useRef(0);
+    const currentOutputColorRef = useRef(terminalOutputColors[ 0 ]);
+
+    const isTyping = pendingLines.length > 0 || pendingTerminalLines.length > 0;
+
+    useEffect(() => {
+        if (hasBooted) {
+            return;
+        }
+
+        if (bootCommandText.length < bootCommand.length) {
+            const timeout = window.setTimeout(() => {
+                setBootCommandText(bootCommand.slice(0, bootCommandText.length + 1));
+            }, 90);
+
+            return () => window.clearTimeout(timeout);
+        }
+
+        const timeout = window.setTimeout(() => {
+            setTerminalLines([{ type: "prompt", command: bootCommand }]);
+            setPendingTerminalLines(profileCodeLines);
+            setHasBooted(true);
+        }, 350);
+
+        return () => window.clearTimeout(timeout);
+    }, [bootCommandText, hasBooted]);
+
+    useEffect(() => {
+        if (pendingTerminalLines.length === 0) {
+            return;
+        }
+
+        const [currentLine, ...restLines] = pendingTerminalLines;
+
+        if (currentLine.type === "code" && currentLine.segments) {
+            const codeLineLength = getCodeLineLength(currentLine);
+            const visibleCharacters = typedCodeLine?.line === currentLine ? typedCodeLine.visibleCharacters : 0;
+
+            if (visibleCharacters < codeLineLength) {
+                const timeout = window.setTimeout(() => {
+                    setTypedCodeLine({
+                        line: currentLine,
+                        visibleCharacters: visibleCharacters + 1,
+                    });
+                }, 20);
+
+                return () => window.clearTimeout(timeout);
+            }
+
+            const timeout = window.setTimeout(() => {
+                setTerminalLines((lines) => [...lines, currentLine]);
+                setTypedCodeLine(null);
+                setPendingTerminalLines(restLines);
+            }, 120);
+
+            return () => window.clearTimeout(timeout);
+        }
+
+        const timeout = window.setTimeout(() => {
+            setTerminalLines((lines) => [...lines, currentLine]);
+            setPendingTerminalLines(restLines);
+        }, 180);
+
+        return () => window.clearTimeout(timeout);
+    }, [pendingTerminalLines, typedCodeLine]);
+
+    useEffect(() => {
+        if (pendingLines.length === 0) {
+            return;
+        }
+
+        const [currentLine, ...restLines] = pendingLines;
+
+        if (typedLine.length < currentLine.length) {
+            const timeout = window.setTimeout(() => {
+                setTypedLine(currentLine.slice(0, typedLine.length + 1));
+            }, 28);
+
+            return () => window.clearTimeout(timeout);
+        }
+
+        const timeout = window.setTimeout(() => {
+            setTerminalLines((lines) => [
+                ...lines,
+                { type: "output", content: currentLine, colorClassName: currentOutputColorRef.current },
+            ]);
+            setTypedLine("");
+            setPendingLines(restLines);
+
+            if (restLines.length === 0 && redirectTo) {
+                window.setTimeout(() => {
+                    window.location.href = redirectTo;
+                }, 450);
+            }
+        }, 220);
+
+        return () => window.clearTimeout(timeout);
+    }, [pendingLines, redirectTo, typedLine]);
+
+    useEffect(() => {
+        terminalBodyRef.current?.scrollTo({
+            top: terminalBodyRef.current.scrollHeight,
+            behavior: "smooth",
+        });
+    }, [terminalLines, typedCodeLine, typedLine]);
+
+    const executeCommand = (normalizedCommand: string, displayCommand = normalizedCommand) => {
+        if (!normalizedCommand || isTyping || !hasBooted) {
+            return;
+        }
+
+        setTerminalLines((lines) => [...lines, { type: "prompt", command: displayCommand }]);
+        setCommand("");
+
+        if (normalizedCommand === "clean") {
+            window.setTimeout(() => {
+                setTerminalLines(initialTerminalLines);
+                setPendingLines([]);
+                setPendingTerminalLines([]);
+                setTypedLine("");
+                setTypedCodeLine(null);
+            }, 120);
+            return;
+        }
+
+        const result = commandOutput[ normalizedCommand ];
+
+        if (!result) {
+            currentOutputColorRef.current = terminalOutputColors[ Math.floor(Math.random() * terminalOutputColors.length) ];
+            setPendingLines([
+                `command not found: ${ normalizedCommand }`,
+                "Type `help` to see the tiny spellbook.",
+            ]);
+            setRedirectTo(null);
+            return;
+        }
+
+        currentOutputColorRef.current = terminalOutputColors[ Math.floor(Math.random() * terminalOutputColors.length) ];
+        setPendingLines(result.lines ?? []);
+        setPendingTerminalLines(result.terminalLines ?? []);
+        setRedirectTo(result.redirectTo ?? null);
+    };
+
+    const runCommand = (event: FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        executeCommand(command.trim().toLowerCase().replace(/\.+$/, ""));
+    };
+
+    const handleCommandKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+        if (event.key.toLowerCase() !== "h" || isTyping || !hasBooted) {
+            return;
+        }
+
+        const now = Date.now();
+
+        if (now - lastHKeyAtRef.current < 420) {
+            event.preventDefault();
+            executeCommand("hi", "hh");
+            lastHKeyAtRef.current = 0;
+            return;
+        }
+
+        lastHKeyAtRef.current = now;
+    };
+
+    const renderTerminalLine = (line: TerminalLine, index: number, visibleCharacters?: number) => {
+        const lineNumber = String(index + 1).padStart(2, "0");
+
+        if (line.type === "prompt") {
+            return (
+                <div key={ index } className="flex gap-4 whitespace-nowrap">
+                    <span className="w-5 shrink-0 text-right text-zinc-700">{ lineNumber }</span>
+                    <span className="text-green-400">➜</span>
+                    <span className="text-blue-400">~</span>
+                    <span className={ clsx(line.command.startsWith("//") ? "text-zinc-600 italic" : "text-zinc-200") }>
+                        { line.command }
+                    </span>
+                </div>
+            );
+        }
+
+        if (line.type === "output") {
+            return (
+                <div key={ index } className="flex gap-4 whitespace-nowrap">
+                    <span className="w-5 shrink-0 text-right text-zinc-700">{ lineNumber }</span>
+                    <span className="text-zinc-700">›</span>
+                    <span className={ line.colorClassName ?? "text-emerald-400" }>{ line.content }</span>
+                </div>
+            );
+        }
+
+        if (line.type === "error") {
+            return (
+                <div key={ index } className="flex gap-4 whitespace-nowrap">
+                    <span className="w-5 shrink-0 text-right text-zinc-700">{ lineNumber }</span>
+                    <span className="text-red-400">×</span>
+                    <span className="text-red-300">{ line.content }</span>
+                </div>
+            );
+        }
+
+        return (
+            <div key={ index } className={ clsx("flex gap-4", line.nowrap && "whitespace-nowrap") }>
+                <span className="w-5 text-zinc-700 shrink-0 text-right">{ lineNumber }</span>
+                <span className="whitespace-pre">
+                    { line.segments ? renderCodeSegments(line.segments, visibleCharacters) : line.content }
+                    { visibleCharacters !== undefined && <span className="ml-1 animate-pulse text-blue-400">_</span> }
+                </span>
+            </div>
+        );
+    };
+
     return (
         <section className={"container-root pt-12 sm:pt-16 md:pt-20 lg:pt-24"}>
             <div className="flex items-center gap-4 mb-10 translate-x-1">
@@ -89,43 +463,52 @@ export default function Hero() {
                                 </div>
                             </div>
 
-                            <div className="relative z-10 overflow-x-auto px-6 py-7 md:px-8">
-                                <div className="space-y-3.5">
-                                <div className="flex gap-4 whitespace-nowrap">
-                                    <span className="w-5 shrink-0 text-right text-zinc-700">01</span>
-                                    <span className="text-green-400">➜</span>
-                                    <span className="text-blue-400">~</span>
-                                    <span className="text-zinc-600 italic">// Hello</span>
+                            <div
+                                className="relative z-10 flex h-90 flex-col px-6 py-7 md:px-8"
+                                onClick={ () => inputRef.current?.focus() }
+                            >
+                                <div ref={ terminalBodyRef } className="flex-1 space-y-3.5 overflow-x-auto overflow-y-auto no-scrollbar">
+                                    { terminalLines.map((line, index) => renderTerminalLine(line, index)) }
+                                    { typedCodeLine && renderTerminalLine(
+                                        typedCodeLine.line,
+                                        terminalLines.length,
+                                        typedCodeLine.visibleCharacters,
+                                    ) }
+                                    { typedLine && (
+                                        <div className="flex gap-4 whitespace-nowrap">
+                                            <span className="w-5 shrink-0 text-right text-zinc-700">
+                                                { String(terminalLines.length + 1).padStart(2, "0") }
+                                            </span>
+                                            <span className="text-zinc-700">›</span>
+                                            <span className={ currentOutputColorRef.current }>
+                                                { typedLine }
+                                                <span className="ml-1 animate-pulse text-blue-400">_</span>
+                                            </span>
+                                        </div>
+                                    ) }
+                                    <form onSubmit={ runCommand } className="flex gap-4 whitespace-nowrap">
+                                        <span className="w-5 shrink-0 text-right text-zinc-700">
+                                            { String(terminalLines.length + (typedLine ? 2 : 1)).padStart(2, "0") }
+                                        </span>
+                                        <span className="text-green-400">➜</span>
+                                        <span className="text-blue-400">~</span>
+                                        <label className="sr-only" htmlFor="hero-terminal-command">Terminal
+                                            command</label>
+                                        <input
+                                            ref={ inputRef }
+                                            id="hero-terminal-command"
+                                            value={ hasBooted ? command : bootCommandText }
+                                            onChange={ (event) => setCommand(event.target.value) }
+                                            onKeyDown={ handleCommandKeyDown }
+                                            disabled={ isTyping || !hasBooted }
+                                            className="min-w-40 flex-1 border-none bg-transparent p-0 text-zinc-100 outline-none placeholder:text-zinc-700 disabled:cursor-wait"
+                                            placeholder={ isTyping ? "typing..." : "try: whoami / help / hi" }
+                                            autoComplete="off"
+                                            spellCheck={ false }
+                                        />
+                                        <span className="animate-pulse text-blue-500">_</span>
+                                    </form>
                                 </div>
-                                <div className="flex gap-4">
-                                    <span className="w-5 text-zinc-700 shrink-0 text-right">02</span>
-                                    <span className="text-blue-500/90">const</span>
-                                    <span className="text-zinc-100">Profile</span>
-                                    <span className="text-zinc-500">=</span>
-                                    <span className="text-zinc-500">{'{'}</span>
-                                </div>
-                                <div className="flex gap-4 whitespace-nowrap">
-                                    <span className="w-5 text-zinc-700 shrink-0 text-right">03</span>
-                                    <span className="text-zinc-400 pl-8">role:</span>
-                                    <span className="text-emerald-400">"Software Engineer"</span>
-                                    <span className="text-zinc-500">,</span>
-                                </div>
-                                <div className="flex gap-4 whitespace-nowrap">
-                                    <span className="w-5 text-zinc-700 shrink-0 text-right">04</span>
-                                    <span className="text-zinc-400 pl-8">stack:</span>
-                                    <span className="text-emerald-400">["Java", "TypeScript", "Node.js"]</span>
-                                    <span className="text-zinc-500">,</span>
-                                </div>
-                                <div className="flex gap-4 whitespace-nowrap">
-                                    <span className="w-5 text-zinc-700 shrink-0 text-right">05</span>
-                                    <span className="text-zinc-400 pl-8">passion:</span>
-                                    <span className="text-emerald-400">"Photography (Sony α7M4)"</span>
-                                </div>
-                                <div className="flex gap-4">
-                                    <span className="w-5 text-zinc-700 shrink-0 text-right">06</span>
-                                    <span className="text-zinc-500">{'}'}</span>
-                                </div>
-                            </div>
 
                                 <div className="mt-8 flex items-center justify-between border-t border-white/[0.07] pt-5">
                                 <div className="flex items-center gap-6">
