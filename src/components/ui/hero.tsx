@@ -26,6 +26,7 @@ type CommandResult = {
 
 const githubUrl = "https://github.com/chriy";
 const bootCommand = "whoami";
+const bootStorageKey = "hero-terminal-booted";
 const terminalOutputColors = [
     "text-emerald-400",
     "text-sky-400",
@@ -184,6 +185,12 @@ export default function Hero() {
             return;
         }
 
+        if (window.sessionStorage.getItem(bootStorageKey)) {
+            setTerminalLines(initialTerminalLines);
+            setHasBooted(true);
+            return;
+        }
+
         if (bootCommandText.length < bootCommand.length) {
             const timeout = window.setTimeout(() => {
                 setBootCommandText(bootCommand.slice(0, bootCommandText.length + 1));
@@ -193,6 +200,7 @@ export default function Hero() {
         }
 
         const timeout = window.setTimeout(() => {
+            window.sessionStorage.setItem(bootStorageKey, "true");
             setTerminalLines([{ type: "prompt", command: bootCommand }]);
             setPendingTerminalLines(profileCodeLines);
             setHasBooted(true);
