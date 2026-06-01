@@ -464,7 +464,7 @@ export default function Hero() {
                                 </div>
                                 <div className={ clsx("flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.22em] text-zinc-500", maple.className) }>
                                     <span className="h-1.5 w-1.5 rounded-full bg-blue-500"></span>
-                                    profile.ts
+                                    terminal
                                 </div>
                             </div>
 
